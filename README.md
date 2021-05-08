@@ -13,4 +13,5 @@ _University of Chile_.
 
 ---
 
-**The rest of the documentation is left for the users of this template to complete**
+Estudiante: Eric Kirchgessner
+Fecha comienzo: 08/Mayo/2021
