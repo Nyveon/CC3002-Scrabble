@@ -1,13 +1,17 @@
 package types;
 
+/**
+ * Interface defining common attributes of all scrabble variables
+ */
 public interface IScrabbleVariable {
-    String toString();
-
+    // All types convert to themselves -> All types require a way to copy themselves
     IScrabbleVariable copy();
 
-    int hashCode();
+    // Testing functions
+    @Override int hashCode();
+    @Override boolean equals(Object other);
 
-    boolean equals(Object other);
-
-    ScrabbleString toScrabbleString(); //all convert to scrabble string
+    // All types can convert to ScrabbleString
+    @Override String toString();
+    ScrabbleString toScrabbleString();
 }

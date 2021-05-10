@@ -1,11 +1,10 @@
 package types;
-import java.util.Objects;
 
 
 /**
  * Scrabble variable which encapsulates a java string.
  */
-public class ScrabbleString implements IScrabbleVariable {
+public class ScrabbleString extends AbstractScrabbleVariable {
     private String value;
 
     // ------<Primary functions>------
@@ -24,7 +23,7 @@ public class ScrabbleString implements IScrabbleVariable {
      * @return Value as a java string.
      */
     @Override public String toString() {
-        return value;
+        return this.value;
     }
 
 
@@ -33,21 +32,11 @@ public class ScrabbleString implements IScrabbleVariable {
      * @return identical copy ScrabbleString.
      */
     public ScrabbleString copy() {
-        return new ScrabbleString(value);
+        return new ScrabbleString(this.value);
     }
 
 
     // ------<For testing>------
-
-    /**
-     * Overrides Object hashCode.
-     * @return hash of the class as an integer.
-     */
-    @Override public int hashCode() {
-        return Objects.hash(ScrabbleString.class);
-    }
-
-
     /**
      * Compares a ScrabbleString with another object
      * @param other Any other object.
