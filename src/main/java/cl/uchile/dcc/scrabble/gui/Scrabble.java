@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * <Complete here with the details of the implemented application>
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Eric Kirchgessner.
  */
 public class Scrabble extends Application {
 
@@ -22,7 +22,7 @@ public class Scrabble extends Application {
 
   @Override
   public void start(Stage primaryStage) {
-    primaryStage.setTitle("Final reality");
+    primaryStage.setTitle("Scrabble");
 
     Label label = new Label("This will be an app sometime");
     label.setAlignment(Pos.CENTER);
@@ -32,5 +32,6 @@ public class Scrabble extends Application {
     primaryStage.setScene(scene);
 
     primaryStage.show();
+
   }
 }
