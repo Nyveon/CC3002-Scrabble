@@ -10,7 +10,6 @@ public abstract class AbstractScrabbleVariableTest {
     protected Random rng;
 
 
-
     // ------<Constructor Test>------
     /**
      * Test for the class against a different class.

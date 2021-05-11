@@ -9,7 +9,7 @@ public interface IScrabbleVariable {
 
     // Testing functions
     @Override int hashCode();
-    @Override boolean equals(Object other);
+    @Override boolean equals(Object obj);
 
     // All types can convert to ScrabbleString
     @Override String toString();

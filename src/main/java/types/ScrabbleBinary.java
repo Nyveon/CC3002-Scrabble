@@ -1,6 +1,6 @@
 package types;
 
-public class ScrabbleBinary implements IScrabbleNumber{
+public class ScrabbleBinary /*extends AbstractScrabbleNumber */{
     private String value;
 
     public ScrabbleBinary(String val) {

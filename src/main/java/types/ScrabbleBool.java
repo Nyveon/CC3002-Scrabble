@@ -38,12 +38,12 @@ public class ScrabbleBool extends AbstractScrabbleVariable {
     // ------<For testing>------
     /**
      * Compares a ScrabbleBool with another object
-     * @param other Any other object.
+     * @param obj Any other object.
      * @return True if they are the same object, false if they are not.
      */
-    @Override public boolean equals(Object other) {
-        if (other instanceof ScrabbleBool) {
-            var o = (ScrabbleBool) other;
+    @Override public boolean equals(Object obj) {
+        if (obj instanceof ScrabbleBool) {
+            var o = (ScrabbleBool) obj;
             return o.value == this.value;
         }
         return false;

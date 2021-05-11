@@ -39,12 +39,12 @@ public class ScrabbleString extends AbstractScrabbleVariable {
     // ------<For testing>------
     /**
      * Compares a ScrabbleString with another object
-     * @param other Any other object.
+     * @param obj Any other object.
      * @return True if they are the same object, false if they are not.
      */
-    @Override public boolean equals(Object other) {
-        if (other instanceof ScrabbleString) {
-            var o = (ScrabbleString) other;
+    @Override public boolean equals(Object obj) {
+        if (obj instanceof ScrabbleString) {
+            var o = (ScrabbleString) obj;
             return o.value.equals(this.value);
         }
         return false;
