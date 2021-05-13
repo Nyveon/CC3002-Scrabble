@@ -72,5 +72,11 @@ public class ScrabbleInt extends AbstractScrabbleNumber {
         return copy();
     }
 
-    //todo: int to binary
+    /**
+     * Convert ScrabbleInt to ScrabbleBInary.
+     * @return Binary string representation of the integer.
+     */
+    public ScrabbleBinary toScrabbleBinary() {
+        return null; //todo: implement this
+    }
 }
