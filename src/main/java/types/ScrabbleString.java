@@ -1,11 +1,13 @@
 package types;
 
 
+import java.util.Objects;
+
 /**
  * Scrabble variable which encapsulates a java string.
  */
 public class ScrabbleString extends AbstractScrabbleVariable {
-    private String value;
+    private final String value;
 
     // ------<Primary functions>------
     /**
@@ -16,6 +18,15 @@ public class ScrabbleString extends AbstractScrabbleVariable {
         this.value = val;
     }
 
+    // ------<Getters and setters>------
+
+    /**
+     * Getter for the main value of the scrabble variable.
+     * @return value of the variable, as the corresponding java variable type.
+     */
+    String getValue() {
+        return this.value;
+    }
 
     /**
      * Procures the value of the variable.
@@ -35,29 +46,41 @@ public class ScrabbleString extends AbstractScrabbleVariable {
         return new ScrabbleString(this.value);
     }
 
-
     // ------<For testing>------
     /**
-     * Compares a ScrabbleString with another object
-     * @param obj Any other object.
+     * Compares a this object with another object
+     * Generated directly by IntelliJ.
+     * @param o Any other object.
      * @return True if they are the same object, false if they are not.
      */
-    @Override public boolean equals(Object obj) {
-        if (obj instanceof ScrabbleString) {
-            var o = (ScrabbleString) obj;
-            return o.value.equals(this.value);
-        }
-        return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ScrabbleString that = (ScrabbleString) o;
+        return value.equals(that.value);
     }
-
-
-    // ------<Conversions>------
 
     /**
-     * Convert ScrabbleString to ScrabbleString.
-     * @return copy of the original ScrabbleString.
+     * Overrides Object hashCode.
+     * Generated directly by IntelliJ.
+     * @return hash of the class and value as an integer.
      */
-    public ScrabbleString toScrabbleString() {
-        return copy();
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), value);
     }
+
+
+    // ------<Operations>------
+
+    /**
+     * Concatenate other scrabble variable's value, to this scrabble string's variable
+     * @param other_value OTher wscrabble variable of any type
+     * @return Scrabble String with the new value.
+     */
+    public ScrabbleString plus(IScrabbleVariable other_value) {
+        return new ScrabbleString(this.value + other_value.toString());
+    }
+
 }

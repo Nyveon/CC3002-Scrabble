@@ -59,8 +59,33 @@ class ScrabbleStringTest extends AbstractScrabbleVariableTest {
      * Test conversions
      * Tests both toScrabbleString() and copy()
      */
-    @RepeatedTest(20) void toScrabbleStringTest() {
+    @RepeatedTest(20) void conversionTest() {
         // Convert class to same class
         assertEquals(tester, tester.toScrabbleString(), "Non identical copy. seed = " + seed);
+    }
+
+    /**
+     * Test concatenations
+     * Tests sum
+     */
+    @RepeatedTest(100) void operationTest() {
+        double value_float = rng.nextDouble();
+        int value_int = rng.nextInt();
+        String value_binary = new ScrabbleInt(value_int).toScrabbleBinary().getValue();
+        boolean value_bool = rng.nextBoolean();
+        String value_string = generateValue();
+
+        var test_float = new ScrabbleFloat(value_float);
+        var test_int = new ScrabbleInt(value_int);
+        var test_binary = new ScrabbleBinary(value_binary);
+        var test_bool = new ScrabbleBool(value_bool);
+        var test_string = new ScrabbleString(value_string);
+
+        // Tests
+        assertEquals(value + value_float, tester.plus(test_float).getValue());
+        assertEquals(value + value_int, tester.plus(test_int).getValue());
+        assertEquals(value + value_binary, tester.plus(test_binary).getValue());
+        assertEquals(value + value_bool, tester.plus(test_bool).getValue());
+        assertEquals(value + value_string, tester.plus(test_string).getValue());
     }
 }

@@ -12,7 +12,7 @@ class ScrabbleFloatTest extends AbstractScrabbleVariableTest {
 
     /**
      * Generates a random value
-     * @return float (random)
+     * @return double (random)
      */
     private double generateValue() {
         return rng.nextDouble();
@@ -58,8 +58,42 @@ class ScrabbleFloatTest extends AbstractScrabbleVariableTest {
      * ScrabbleInt -> ScrabbleString
      * ScrabbleInt -> ScrabbleFloat
      */
-    @RepeatedTest(20) void toScrabbleStringTest() {
+    @RepeatedTest(20) void conversionTest() {
         assertEquals(tester, tester.toScrabbleFloat(), "Non identical copy. seed = " + seed);
         assertEquals(tester.toScrabbleString(), new ScrabbleString(Double.toString(value)), "Wrong conversion to string. seed = " + seed);
+    }
+
+    /**
+     * Test operations
+     * (+, -, x, /) with float
+     * (+, -, x, /) with int
+     * (+, -, x, /) with binary
+     */
+    @RepeatedTest(100) void operationTest() {
+        double float_value = rng.nextDouble();
+        int int_value = rng.nextInt();
+        String binary_value = new ScrabbleInt(int_value).toScrabbleBinary().getValue();
+
+        // Test against floats
+        assertEquals(value + float_value, tester.plus(new ScrabbleFloat(float_value)).getValue());
+        assertEquals(value - float_value, tester.minus(new ScrabbleFloat(float_value)).getValue());
+        assertEquals(value * float_value, tester.times(new ScrabbleFloat(float_value)).getValue());
+        assertEquals(value / float_value, tester.div(new ScrabbleFloat(float_value)).getValue());
+
+
+        // Test against ints
+        assertEquals(value + int_value, tester.plus(new ScrabbleInt(int_value)).getValue());
+        assertEquals(value - int_value, tester.minus(new ScrabbleInt(int_value)).getValue());
+        assertEquals(value * int_value, tester.times(new ScrabbleInt(int_value)).getValue());
+        assertEquals(value / int_value, tester.div(new ScrabbleInt(int_value)).getValue());
+
+
+        // Test against binaries
+        assertEquals(value + int_value, tester.plus(new ScrabbleBinary(binary_value)).getValue());
+        assertEquals(value - int_value, tester.minus(new ScrabbleBinary(binary_value)).getValue());
+        assertEquals(value * int_value, tester.times(new ScrabbleBinary(binary_value)).getValue());
+        assertEquals(value / int_value, tester.div(new ScrabbleBinary(binary_value)).getValue());
+
+
     }
 }
