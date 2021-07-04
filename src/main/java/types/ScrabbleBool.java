@@ -1,5 +1,7 @@
 package types;
 
+import types.numbers.ScrabbleBinary;
+
 import java.util.Objects;
 
 /**

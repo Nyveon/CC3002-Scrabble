@@ -1,4 +1,6 @@
-package types;
+package types.numbers;
+
+import types.AbstractScrabbleVariable;
 
 import java.util.Objects;
 
@@ -14,7 +16,7 @@ public class ScrabbleInt extends AbstractScrabbleVariable implements IScrabbleNu
      * Getter for the main value of the scrabble variable.
      * @return value of the variable, as the corresponding java variable type.
      */
-    int getValue() {
+    public int getValue() {
         return this.value;
     }
 

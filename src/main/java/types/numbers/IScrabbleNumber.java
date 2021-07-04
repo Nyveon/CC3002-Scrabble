@@ -1,4 +1,4 @@
-package types;
+package types.numbers;
 
 /**
  * Interface defining common attributes of all scrabble number type variables

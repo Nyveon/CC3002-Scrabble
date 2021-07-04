@@ -1,5 +1,7 @@
 package types;
 
+import types.numbers.ScrabbleBinary;
+
 /**
  * Interface that defines behaviours all binary type data shares.
  */

@@ -2,13 +2,17 @@ package types;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import types.numbers.ScrabbleBinary;
+import types.numbers.ScrabbleFloat;
+import types.numbers.ScrabbleInt;
+
 import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScrabbleFloatTest extends AbstractScrabbleVariableTest {
     // Testing values
     private double value;
-    private ScrabbleFloat  tester;
+    private ScrabbleFloat tester;
 
     /**
      * Generates a random value
