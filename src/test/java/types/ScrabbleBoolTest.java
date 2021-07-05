@@ -2,6 +2,8 @@ package types;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import types.numbers.ScrabbleBinary;
+
 import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 

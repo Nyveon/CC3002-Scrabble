@@ -3,6 +3,10 @@ package types;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import types.numbers.ScrabbleBinary;
+import types.numbers.ScrabbleFloat;
+import types.numbers.ScrabbleInt;
+
 import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 

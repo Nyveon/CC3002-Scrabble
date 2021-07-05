@@ -1,4 +1,6 @@
-package types;
+package types.numbers;
+
+import types.AbstractScrabbleVariable;
 
 import java.util.Objects;
 
@@ -13,7 +15,7 @@ public class ScrabbleFloat extends AbstractScrabbleVariable implements IScrabble
      * Getter for the main value of the scrabble variable.
      * @return value of the variable, as the corresponding java variable type.
      */
-    double getValue() {
+    public double getValue() {
         return this.value;
     }
 

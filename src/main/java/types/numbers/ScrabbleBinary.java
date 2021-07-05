@@ -1,4 +1,8 @@
-package types;
+package types.numbers;
+
+import types.AbstractScrabbleVariable;
+import types.IScrabbleBinaries;
+import types.ScrabbleBool;
 
 import java.util.Objects;
 
@@ -51,7 +55,7 @@ public class ScrabbleBinary extends AbstractScrabbleVariable implements IScrabbl
      * Getter for the main value of the scrabble variable.
      * @return value of the variable, as the corresponding java variable type.
      */
-    String getValue() {
+    public String getValue() {
         return this.value;
     }
 
@@ -323,8 +327,5 @@ public class ScrabbleBinary extends AbstractScrabbleVariable implements IScrabbl
         }
         return new ScrabbleBinary(new_string.toString());
     }
-
-
-
 
 }
