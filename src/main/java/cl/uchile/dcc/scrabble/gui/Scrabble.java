@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import syntax.INode;
+import syntax.variables.NodeInt;
 
 /**
  * Main entry point for the application.
@@ -22,6 +24,11 @@ public class Scrabble extends Application {
 
   @Override
   public void start(Stage primaryStage) {
+    // manual tests lol
+    INode tree = new NodeInt(1234);
+    System.out.println(tree.evaluate());
+
+
     primaryStage.setTitle("Scrabble");
 
     Label label = new Label("This will be an app sometime");
