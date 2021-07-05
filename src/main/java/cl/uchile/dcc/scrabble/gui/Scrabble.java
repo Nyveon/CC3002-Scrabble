@@ -9,12 +9,10 @@ import syntax.INode;
 import syntax.binarynodes.operators.NodeMinus;
 import syntax.binarynodes.operators.NodeOr;
 import syntax.binarynodes.operators.NodePlus;
-import syntax.unarynodes.operators.NodeNot;
 import syntax.unarynodes.operators.NodetoBinary;
-import syntax.unarynodes.variables.NodeBinary;
-import syntax.unarynodes.variables.NodeBool;
-import syntax.unarynodes.variables.NodeFloat;
-import syntax.unarynodes.variables.NodeInt;
+import syntax.endnodes.NodeBinary;
+import syntax.endnodes.NodeFloat;
+import syntax.endnodes.NodeInt;
 
 /**
  * Main entry point for the application.
