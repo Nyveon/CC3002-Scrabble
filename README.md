@@ -19,7 +19,7 @@ Fecha comienzo: 08/Mayo/2021
 Documentación externa del proyecto
 
 
-## Variables
+## Variable Types
 
 ### Scrabble String
     ScrabbleString
@@ -134,14 +134,45 @@ Documentación externa del proyecto
   * with Scrabble Binary: operates each corresponding digit with each-other.
 
 
+## Variable Management
 
+Not fully implemented yet but, instead of using `new ScrabbleVariable()` you can use the FlyweightFactory object's createVariable methods for efficient management of memory.
+The FlyweightFactory object stores each variable with a name into a hashmap.
 
+## Abstract Syntax Tree
 
+For running programs, there is an abstract SyntaxTree. 
+The tree is made of nodes. Every node can be evaluated, which will return a ScrabbleVariable described above.
+Important note: if a node can't be evaluated (for example, because of invalid types in the operation), it will return null.
+There are 3 different types of nodes:
 
+### End Nodes
+When evaluated, they simply return the value stored within them.
+* `NodeString` holds a ScrabbleString.
+* `NodeBool` holds a ScrabbleBool.
+* `NodeFloat` holds a ScrabbleFloat.
+* `NodeInt` holds a ScrabbleInt.
+* `NodeBinary` holds a ScrabbleBinary.
 
+### Unary Nodes
+Has a single child node. When evaluated, it returns the evaluation of its child node operated with the operation of the node type.
+* `NodeNot` negates the child node.
+* `NodetoString` converts the child node to a ScrabbleString.
+* `NodetoBool` converts the child node to a ScrabbleBool.
+* `NodetoFloat` converts the child node to a ScrabbleFloat.
+* `NodetoInt` converts the child node to a ScrabbleInt.
+* `NodetoBinary` converts the child node to a ScrabbleBinary.
 
+### Binary Nodes
+Has two child nodes (left and right). It applies the operation of the node type as a method to the evaluation of the left node, with the evaluation of the right node as the value.
+* `NodePlus` plus method mentioned above.
+* `NodeMinus` plus method mentioned above.
+* `NodeTimes` times method mentioned above.
+* `NodeDiv` div method mentioned above.
+* `NodeAnd` and method mentioned above.
+* `NodeOr` or method mentioned above.
 
-
+To be continued...
 
 
 Si estás leyendo esto, que tengas un buen dia/noche c:
