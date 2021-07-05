@@ -327,4 +327,5 @@ public class ScrabbleBinary extends AbstractScrabbleVariable implements IScrabbl
         }
         return new ScrabbleBinary(new_string.toString());
     }
+
 }

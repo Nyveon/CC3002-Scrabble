@@ -1,4 +1,4 @@
-package syntax.variables;
+package syntax.unarynodes.variables;
 
 import syntax.INode;
 import types.IScrabbleVariable;

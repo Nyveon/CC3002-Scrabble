@@ -3,7 +3,7 @@ package syntax;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
-import syntax.variables.*;
+import syntax.unarynodes.variables.*;
 import types.ScrabbleBool;
 import types.ScrabbleString;
 import types.numbers.ScrabbleBinary;

@@ -6,7 +6,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import syntax.INode;
-import syntax.variables.NodeInt;
+import syntax.binarynodes.operators.NodeMinus;
+import syntax.binarynodes.operators.NodeOr;
+import syntax.binarynodes.operators.NodePlus;
+import syntax.unarynodes.operators.NodeNot;
+import syntax.unarynodes.operators.NodetoBinary;
+import syntax.unarynodes.variables.NodeBinary;
+import syntax.unarynodes.variables.NodeBool;
+import syntax.unarynodes.variables.NodeFloat;
+import syntax.unarynodes.variables.NodeInt;
 
 /**
  * Main entry point for the application.
@@ -25,7 +33,23 @@ public class Scrabble extends Application {
   @Override
   public void start(Stage primaryStage) {
     // manual tests lol
-    INode tree = new NodeInt(1234);
+    INode tree =	new NodePlus(
+            new NodeFloat(
+                    6.9
+            )
+            ,
+            new NodeOr(
+                    new NodeBinary("1000")
+                    ,
+                    new NodetoBinary(
+                            new NodeMinus(
+                                    new NodeInt(25)
+                                    ,
+                                    new NodeBinary("0101")
+                            )
+                    )
+            )
+    );
     System.out.println(tree.evaluate());
 
 

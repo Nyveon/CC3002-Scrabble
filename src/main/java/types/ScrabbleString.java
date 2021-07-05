@@ -24,7 +24,7 @@ public class ScrabbleString extends AbstractScrabbleVariable {
      * Getter for the main value of the scrabble variable.
      * @return value of the variable, as the corresponding java variable type.
      */
-    String getValue() {
+    public String getValue() {
         return this.value;
     }
 
