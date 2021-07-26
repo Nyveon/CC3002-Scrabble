@@ -132,9 +132,15 @@ public class TreeNode {
      * @return Stackpane containing the node circle and node label.
      */
     private static StackPane build_node(INode node) throws IllegalStateException {
+
+        /*
+         * Shape pre-processing
+         */
         Shape shape = null;
-        
         switch (node.get_shape()) {
+            case -1:
+                shape = new Circle(0, 0, NODE_SIZE);
+                break;
             case 0: // Basic circle
                 shape = new Circle(0, 0, NODE_SIZE);
                 break;
@@ -163,6 +169,13 @@ public class TreeNode {
         shape.setStroke(DARK);
         shape.setStrokeWidth(4);
 
+        /*
+         * Shape post-processing
+         */
+        if (node.get_shape() == -1) { // Empty node
+            shape.setStroke(DARK.darker());
+            shape.getStrokeDashArray().addAll(18d, 11d);
+        }
 
 
         // --- Node mouse exited event ---
@@ -192,6 +205,8 @@ public class TreeNode {
             finalShape.setFill(VERYDARK);
         });
 
+        // Evaluate the node (this actually dependso on the control-state)
+        //todo: fix
         node_stack.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             System.out.println(node.evaluate());
         });
