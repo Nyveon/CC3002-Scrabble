@@ -7,6 +7,8 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -38,11 +40,22 @@ import static cl.uchile.dcc.scrabble.gui.ScrabbleColours.*;
  */
 public class Scrabble extends Application {
   static Color COLOUR_BACKGROUND = Color.valueOf("#272744");
+  static double mouse_anchor_x = 0;
+  static double mouse_anchor_y = 0;
+  static final double SCALING = 1.1;
 
+  /**
+   * Main of the program
+   * @param args
+   */
   public static void main(String[] args) {
     launch(args);
   }
 
+  /**
+   * Start the graphical user interface
+   * @param primaryStage
+   */
   @Override
   public void start(Stage primaryStage) {
 
@@ -85,49 +98,59 @@ public class Scrabble extends Application {
     // test tree 2
     INode tree2 = new NodePlus(
             new NodePlus(
-                   new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))
-                    ,
-                    new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))
+                    new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))),
+                    new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))))
             ),
             new NodePlus(
-                    new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))
-                    ,
-                    new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))
+                    new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))),
+                    new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))))
             )
     );
 
-    var tree_render = TreeNode.build_tree(tree);
+    // Render tree
+    var tree_render = TreeNode.build_tree(tree2);
     tree_render.setLayoutX(width/2);
     tree_render.setLayoutY(16);
 
-    final double SCALE_DELTA = 1.1;
-    final StackPane zoomPane = new StackPane();
 
-    // turn this into zoom and translation
-    zoomPane.getChildren().add(tree_render);
-    zoomPane.setOnScroll(new EventHandler<ScrollEvent>() {
-      @Override public void handle(ScrollEvent event) {
-        event.consume();
 
-        if (event.getDeltaY() == 0) {
-          return;
-        }
-
-        double scaleFactor =
-                (event.getDeltaY() > 0)
-                        ? SCALE_DELTA
-                        : 1/SCALE_DELTA;
-
-        tree_render.setScaleX(tree_render.getScaleX() * scaleFactor);
-        tree_render.setScaleY(tree_render.getScaleY() * scaleFactor);
-      }
+    /*
+     * Zoom event on center pane
+     */
+    var workspace = new StackPane();
+    workspace.getChildren().add(tree_render);
+    workspace.addEventHandler(ScrollEvent.SCROLL , e -> {
+      double scale_delta = (e.getDeltaY() > 0) ? SCALING : 1/SCALING;
+      tree_render.setScaleX(tree_render.getScaleX() * scale_delta);
+      tree_render.setScaleY(tree_render.getScaleY() * scale_delta);
     });
 
-    root.setCenter(zoomPane);
+    /*
+     * Drag event on center pane
+     */
+    // When pressed set anchor
+    //todo: WHY DOES THIS TELEPORT AAAAAAAAAAAAAAAA
+    workspace.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
+      mouse_anchor_x = e.getX();
+      mouse_anchor_y = e.getY();
+    });
+    // When dragged, move relative to anchor
+    workspace.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> {
+      tree_render.setTranslateX(e.getX() - mouse_anchor_x);
+      tree_render.setTranslateY(e.getY() - mouse_anchor_y);
+    });
+
+
+
+    root.setCenter(workspace);
 
 
   }
 
+  private static void set_mouse_anchor(double x, double y) {
+    mouse_anchor_x = x;
+    mouse_anchor_y = y;
+  }
 
 
 }

@@ -192,6 +192,10 @@ public class TreeNode {
             finalShape.setFill(VERYDARK);
         });
 
+        node_stack.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            System.out.println(node.evaluate());
+        });
+
 
         return node_stack;
     }
