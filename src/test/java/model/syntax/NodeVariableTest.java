@@ -73,7 +73,7 @@ public class NodeVariableTest {
         assertEquals(sb.toString(), tb.get_label());
         assertEquals(sc.toString(), tc.get_label());
         assertEquals(sd.toString(), td.get_label());
-        assertEquals(se.toString(), te.get_label());
+        assertEquals(se.toString().replaceFirst("^0*", ""), te.get_label());
 
         // Get  children tests
         assertEquals(0, ta.get_children());

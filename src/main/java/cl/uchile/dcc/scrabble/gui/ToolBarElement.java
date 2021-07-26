@@ -51,7 +51,7 @@ public class ToolBarElement {
         front.setFill(BACKGROUND);
         front.opacityProperty().set(0);
 
-        // Initialize the different button types
+        // --Initialize the different button types--
         try {
             switch (button_type) {
                 case "help":
@@ -68,24 +68,12 @@ public class ToolBarElement {
                     break;
                 case "play":
                     add_sprite(RESOURCE_PATH + "play.png");
-
-                    // Flip selected property
-                    button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                        Controller.set_selected(this);
-                    });
-
                     break;
                 case "play all":
                     add_sprite(RESOURCE_PATH + "play_all.png");
                     break;
                 case "trash":
                     add_sprite(RESOURCE_PATH + "trash.png");
-
-                    // Flip selected property
-                    button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                        Controller.set_selected(this);
-                    });
-
                     break;
                 case "trash all":
                     add_sprite(RESOURCE_PATH + "trash_all.png");
@@ -93,18 +81,50 @@ public class ToolBarElement {
                 case "edit":
                     add_sprite(RESOURCE_PATH + "edit.png");
                     Controller.set_selected(this);
-
-                    // Flip selected property
-                    button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                        Controller.set_selected(this);
-                    });
-
                     break;
                 default:
                     break;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+
+        // --Shared button events--
+        switch (button_type) {
+
+            // Selector buttons
+            case "edit":
+            case "trash":
+            case "play":
+                // Flip selected property
+                button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                    Controller.set_selected(this);
+                });
+                break;
+
+            // Zoom in and out (or reset)
+            case "zoom in":
+                button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                    Scrabble.zoom(1d);
+                });
+                break;
+            case "zoom out":
+                button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                    Scrabble.zoom(-1d);
+                });
+                break;
+            case "center":
+                button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                    Scrabble.reset_view();
+                });
+                break;
+
+            // Open help
+            case "help":
+                button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                    OpenBrowser.open("https://github.com/CC3002-Metodologias/scrabble-Nyveon/blob/main/README.md");
+                });
+                break;
         }
 
         // Light up when mouse on top

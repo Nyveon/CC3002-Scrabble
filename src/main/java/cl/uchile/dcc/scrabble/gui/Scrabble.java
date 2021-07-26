@@ -53,6 +53,8 @@ public class Scrabble extends Application {
   static double mouse_anchor_x = 0;
   static double mouse_anchor_y = 0;
   static final double SCALING = 1.1;
+  static final StackPane workspace = new StackPane();
+  static Group tree_render = new Group();
 
   /**
    * Main of the program
@@ -144,18 +146,15 @@ public class Scrabble extends Application {
      * Workspace
      */
     // Render tree
-    var tree_render = TreeNode.build_tree(tree);
+    tree_render = TreeNode.build_tree(tree);
     tree_render.setLayoutX(width/2);
     tree_render.setLayoutY(16);
 
 
     //Zoom event on center pane
-    var workspace = new StackPane();
     workspace.getChildren().add(tree_render);
     workspace.addEventHandler(ScrollEvent.SCROLL , e -> {
-      double scale_delta = (e.getDeltaY() > 0) ? SCALING : 1/SCALING;
-      tree_render.setScaleX(tree_render.getScaleX() * scale_delta);
-      tree_render.setScaleY(tree_render.getScaleY() * scale_delta);
+      zoom(e.getDeltaY());
     });
 
 
@@ -214,6 +213,10 @@ public class Scrabble extends Application {
 
   }
 
+  /**
+   * Make a horizontal separator bar for the toolbar element
+   * @return Toolbar object if possible
+   */
   private static ImageView make_bar() {
     try{
       var bar_image = new FileInputStream(RESOURCE_PATH + "bar.png");
@@ -224,6 +227,18 @@ public class Scrabble extends Application {
     }
   }
 
+  public static void zoom(double direction) {
+    double scale_delta = (direction > 0) ? SCALING : 1/SCALING;
+    tree_render.setScaleX(tree_render.getScaleX() * scale_delta);
+    tree_render.setScaleY(tree_render.getScaleY() * scale_delta);
+  }
+
+  public static void reset_view() {
+    tree_render.setScaleX(1);
+    tree_render.setScaleY(1);
+    tree_render.setTranslateX(0);
+    tree_render.setTranslateY(0);
+  }
 
 
 
