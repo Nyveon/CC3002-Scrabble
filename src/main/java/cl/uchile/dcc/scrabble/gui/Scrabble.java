@@ -1,11 +1,13 @@
 package cl.uchile.dcc.scrabble.gui;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -47,11 +49,11 @@ public class Scrabble extends Application {
 
     // Making main screen
     primaryStage.setTitle("Calcularbol");
-    int height = 720;
-    int width = 1280;
+    int height = 1080;
+    int width = 1920;
 
     // Root scene
-    Pane root = new Pane();
+    var root = new BorderPane();
     root.setPrefSize(width, height);
     Scene scene = new Scene(root, width, height);
     scene.setFill(BACKGROUND);
@@ -80,11 +82,48 @@ public class Scrabble extends Application {
             )
     );
 
+    // test tree 2
+    INode tree2 = new NodePlus(
+            new NodePlus(
+                   new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))
+                    ,
+                    new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))
+            ),
+            new NodePlus(
+                    new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))
+                    ,
+                    new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))
+            )
+    );
 
     var tree_render = TreeNode.build_tree(tree);
     tree_render.setLayoutX(width/2);
     tree_render.setLayoutY(16);
-    root.getChildren().add(tree_render);
+
+    final double SCALE_DELTA = 1.1;
+    final StackPane zoomPane = new StackPane();
+
+    // turn this into zoom and translation
+    zoomPane.getChildren().add(tree_render);
+    zoomPane.setOnScroll(new EventHandler<ScrollEvent>() {
+      @Override public void handle(ScrollEvent event) {
+        event.consume();
+
+        if (event.getDeltaY() == 0) {
+          return;
+        }
+
+        double scaleFactor =
+                (event.getDeltaY() > 0)
+                        ? SCALE_DELTA
+                        : 1/SCALE_DELTA;
+
+        tree_render.setScaleX(tree_render.getScaleX() * scaleFactor);
+        tree_render.setScaleY(tree_render.getScaleY() * scaleFactor);
+      }
+    });
+
+    root.setCenter(zoomPane);
 
 
   }

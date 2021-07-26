@@ -14,6 +14,9 @@ import javafx.scene.text.TextBoundsType;
 import model.syntax.INode;
 import static cl.uchile.dcc.scrabble.gui.ScrabbleColours.*;
 
+/**
+ * Factory class for a tree of nodes
+ */
 public class TreeNode {
     // Default constants
     private static final int NODE_SIZE = 32;
@@ -29,7 +32,8 @@ public class TreeNode {
     public static Group build_tree(INode node) {
         var tree = new Group();
         int max_depth = calculate_depth(node, 0);
-        build_branches_recursive(node, tree, 32, 32, 32, 32, max_depth);
+        //build_node_recursive(node, tree, 0, 0, max_depth);
+        build_branches_recursive(node, tree, 34, 32, 34, 32, max_depth);
         build_node_recursive(node, tree, 0, 0, max_depth);
         return tree;
     }
@@ -67,8 +71,8 @@ public class TreeNode {
 
         switch (node.get_children()) {
             case 2:
-                build_branches_recursive(node.get_child_a(), render_to, x - NODE_HORIZONTAL_SPACING*height, y + NODE_VERTICAL_SPACING, x, y, height);
-                build_branches_recursive(node.get_child_b(), render_to, x + NODE_HORIZONTAL_SPACING*height, y + NODE_VERTICAL_SPACING, x, y, height);
+                build_branches_recursive(node.get_child_a(), render_to, (int) (x - NODE_HORIZONTAL_SPACING*Math.pow(2,height-1)), y + NODE_VERTICAL_SPACING, x, y, height);
+                build_branches_recursive(node.get_child_b(), render_to, (int) (x + NODE_HORIZONTAL_SPACING*Math.pow(2,height-1)), y + NODE_VERTICAL_SPACING, x, y, height);
                 break;
             case 1:
                 build_branches_recursive(node.get_child_a(), render_to, x, y + NODE_VERTICAL_SPACING, x, y, height);
@@ -78,7 +82,7 @@ public class TreeNode {
         // Base case last for depth sorting
         var line = new Line(x1, y1, x, y);
         line.setStroke(MEDIUM);
-        line.setStrokeWidth(3);
+        line.setStrokeWidth(4);
 
         render_to.getChildren().add(line);
     }
@@ -98,8 +102,8 @@ public class TreeNode {
         // Different recursive cases
         switch (node.get_children()) {
             case 2:
-                build_node_recursive(node.get_child_a(), render_to, x - NODE_HORIZONTAL_SPACING*height, y + NODE_VERTICAL_SPACING, height);
-                build_node_recursive(node.get_child_b(), render_to, x + NODE_HORIZONTAL_SPACING*height, y + NODE_VERTICAL_SPACING, height);
+                build_node_recursive(node.get_child_a(), render_to, (int) (x - NODE_HORIZONTAL_SPACING*Math.pow(2,height-1)), y + NODE_VERTICAL_SPACING, height);
+                build_node_recursive(node.get_child_b(), render_to, (int) (x + NODE_HORIZONTAL_SPACING*Math.pow(2,height-1)), y + NODE_VERTICAL_SPACING, height);
                 break;
             case 1:
                 build_node_recursive(node.get_child_a(), render_to, x, y + NODE_VERTICAL_SPACING, height);
