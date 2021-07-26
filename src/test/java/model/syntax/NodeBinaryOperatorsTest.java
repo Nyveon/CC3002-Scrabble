@@ -1,6 +1,7 @@
 package model.syntax;
 
 import model.syntax.unarynodes.operators.NodeNot;
+import model.types.ScrabbleNull;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
@@ -95,68 +96,68 @@ public class NodeBinaryOperatorsTest {
         assertEquals("AND", new NodeAnd(ta,ta2).get_label()); // get label
         assertEquals(2, new NodeAnd(ta,ta2).get_children()); // get children
 
-        assertEquals(null, new NodeAnd(ta,ta2).evaluate()); // String String
-        assertEquals(null, new NodeAnd(ta,tb).evaluate()); // String Bool
-        assertEquals(null, new NodeAnd(ta,tc).evaluate()); // String Float
-        assertEquals(null, new NodeAnd(ta,td).evaluate()); // String Int
-        assertEquals(null, new NodeAnd(ta,te).evaluate()); // String Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(ta,ta2).evaluate()); // String String
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(ta,tb).evaluate()); // String Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(ta,tc).evaluate()); // String Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(ta,td).evaluate()); // String Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(ta,te).evaluate()); // String Binary
 
-        assertEquals(null, new NodeAnd(tb,ta).evaluate()); // Bool String
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(tb,ta).evaluate()); // Bool String
         assertEquals(sb.and(sb2), new NodeAnd(tb,tb2).evaluate()); // Bool Bool
-        assertEquals(null, new NodeAnd(tb,tc).evaluate()); // Bool Float
-        assertEquals(null, new NodeAnd(tb,td).evaluate()); // Bool Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(tb,tc).evaluate()); // Bool Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(tb,td).evaluate()); // Bool Int
         assertEquals(sb.and(se), new NodeAnd(tb,te).evaluate()); // Bool Binary
 
-        assertEquals(null, new NodeAnd(tc,ta).evaluate()); // Int String
-        assertEquals(null, new NodeAnd(tc,tb).evaluate()); // Int Bool
-        assertEquals(null, new NodeAnd(tc,tc2).evaluate()); // Int Float
-        assertEquals(null, new NodeAnd(tc,td).evaluate()); // Int Int
-        assertEquals(null, new NodeAnd(tc,te).evaluate()); // Int Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(tc,ta).evaluate()); // Int String
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(tc,tb).evaluate()); // Int Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(tc,tc2).evaluate()); // Int Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(tc,td).evaluate()); // Int Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(tc,te).evaluate()); // Int Binary
 
-        assertEquals(null, new NodeAnd(td,ta).evaluate()); // Float String
-        assertEquals(null, new NodeAnd(td,tb).evaluate()); // Float Bool
-        assertEquals(null, new NodeAnd(td,tc).evaluate()); // Float Float
-        assertEquals(null, new NodeAnd(td,td2).evaluate()); // Float Int
-        assertEquals(null, new NodeAnd(td,te).evaluate()); // Float Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(td,ta).evaluate()); // Float String
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(td,tb).evaluate()); // Float Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(td,tc).evaluate()); // Float Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(td,td2).evaluate()); // Float Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(td,te).evaluate()); // Float Binary
 
-        assertEquals(null, new NodeAnd(te,ta).evaluate()); // Binary String
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(te,ta).evaluate()); // Binary String
         assertEquals(se.and(sb), new NodeAnd(te,tb).evaluate()); // Binary Bool
-        assertEquals(null, new NodeAnd(te,tc).evaluate()); // Binary Float
-        assertEquals(null, new NodeAnd(te,td).evaluate()); // Binary Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(te,tc).evaluate()); // Binary Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeAnd(te,td).evaluate()); // Binary Int
         assertEquals(se.and(se2), new NodeAnd(te,te2).evaluate()); // Binary Binary
 
         // --Test nodeOr--
         assertEquals("OR", new NodeOr(ta,ta2).get_label()); // get label
         assertEquals(2, new NodeOr(ta,ta2).get_children()); // get children
 
-        assertEquals(null, new NodeOr(ta,ta2).evaluate()); // String String
-        assertEquals(null, new NodeOr(ta,tb).evaluate()); // String Bool
-        assertEquals(null, new NodeOr(ta,tc).evaluate()); // String Float
-        assertEquals(null, new NodeOr(ta,td).evaluate()); // String Int
-        assertEquals(null, new NodeOr(ta,te).evaluate()); // String Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(ta,ta2).evaluate()); // String String
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(ta,tb).evaluate()); // String Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(ta,tc).evaluate()); // String Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(ta,td).evaluate()); // String Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(ta,te).evaluate()); // String Binary
 
-        assertEquals(null, new NodeOr(tb,ta).evaluate()); // Bool String
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(tb,ta).evaluate()); // Bool String
         assertEquals(sb.or(sb2), new NodeOr(tb,tb2).evaluate()); // Bool Bool
-        assertEquals(null, new NodeOr(tb,tc).evaluate()); // Bool Float
-        assertEquals(null, new NodeOr(tb,td).evaluate()); // Bool Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(tb,tc).evaluate()); // Bool Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(tb,td).evaluate()); // Bool Int
         assertEquals(sb.or(se), new NodeOr(tb,te).evaluate()); // Bool Binary
 
-        assertEquals(null, new NodeOr(tc,ta).evaluate()); // Int String
-        assertEquals(null, new NodeOr(tc,tb).evaluate()); // Int Bool
-        assertEquals(null, new NodeOr(tc,tc2).evaluate()); // Int Float
-        assertEquals(null, new NodeOr(tc,td).evaluate()); // Int Int
-        assertEquals(null, new NodeOr(tc,te).evaluate()); // Int Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(tc,ta).evaluate()); // Int String
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(tc,tb).evaluate()); // Int Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(tc,tc2).evaluate()); // Int Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(tc,td).evaluate()); // Int Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(tc,te).evaluate()); // Int Binary
 
-        assertEquals(null, new NodeOr(td,ta).evaluate()); // Float String
-        assertEquals(null, new NodeOr(td,tb).evaluate()); // Float Bool
-        assertEquals(null, new NodeOr(td,tc).evaluate()); // Float Float
-        assertEquals(null, new NodeOr(td,td2).evaluate()); // Float Int
-        assertEquals(null, new NodeOr(td,te).evaluate()); // Float Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(td,ta).evaluate()); // Float String
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(td,tb).evaluate()); // Float Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(td,tc).evaluate()); // Float Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(td,td2).evaluate()); // Float Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(td,te).evaluate()); // Float Binary
 
-        assertEquals(null, new NodeOr(te,ta).evaluate()); // Binary String
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(te,ta).evaluate()); // Binary String
         assertEquals(se.or(sb), new NodeOr(te,tb).evaluate()); // Binary Bool
-        assertEquals(null, new NodeOr(te,tc).evaluate()); // Binary Float
-        assertEquals(null, new NodeOr(te,td).evaluate()); // Binary Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(te,tc).evaluate()); // Binary Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeOr(te,td).evaluate()); // Binary Int
         assertEquals(se.or(se2), new NodeOr(te,te2).evaluate()); // Binary Binary
 
 
@@ -164,35 +165,35 @@ public class NodeBinaryOperatorsTest {
         assertEquals("/", new NodeDiv(ta,ta2).get_label()); // get label
         assertEquals(2, new NodeDiv(ta,ta2).get_children()); // get children
 
-        assertEquals(null, new NodeDiv(ta,ta2).evaluate()); // String String
-        assertEquals(null, new NodeDiv(ta,tb).evaluate()); // String Bool
-        assertEquals(null, new NodeDiv(ta,tc).evaluate()); // String Float
-        assertEquals(null, new NodeDiv(ta,td).evaluate()); // String Int
-        assertEquals(null, new NodeDiv(ta,te).evaluate()); // String Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(ta,ta2).evaluate()); // String String
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(ta,tb).evaluate()); // String Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(ta,tc).evaluate()); // String Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(ta,td).evaluate()); // String Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(ta,te).evaluate()); // String Binary
 
-        assertEquals(null, new NodeDiv(tb,ta).evaluate()); // Bool String
-        assertEquals(null, new NodeDiv(tb,tb2).evaluate()); // Bool Bool
-        assertEquals(null, new NodeDiv(tb,tc).evaluate()); // Bool Float
-        assertEquals(null, new NodeDiv(tb,td).evaluate()); // Bool Int
-        assertEquals(null, new NodeDiv(tb,te).evaluate()); // Bool Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(tb,ta).evaluate()); // Bool String
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(tb,tb2).evaluate()); // Bool Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(tb,tc).evaluate()); // Bool Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(tb,td).evaluate()); // Bool Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(tb,te).evaluate()); // Bool Binary
 
-        assertEquals(null, new NodeDiv(tc,ta).evaluate()); // Int String
-        assertEquals(null, new NodeDiv(tc,tb).evaluate()); // Int Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(tc,ta).evaluate()); // Int String
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(tc,tb).evaluate()); // Int Bool
         assertEquals(sc.div(sc2), new NodeDiv(tc,tc2).evaluate()); // Int Float
         assertEquals(sc.div(sd), new NodeDiv(tc,td).evaluate()); // Int Int
         assertEquals(sc.div(se), new NodeDiv(tc,te).evaluate()); // Int Binary
 
 
-        assertEquals(null, new NodeDiv(td,ta).evaluate()); // Float String
-        assertEquals(null, new NodeDiv(td,tb).evaluate()); // Float Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(td,ta).evaluate()); // Float String
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(td,tb).evaluate()); // Float Bool
         assertEquals(sd.div(sc), new NodeDiv(td,tc).evaluate()); // Float Float
         assertEquals(sd.div(sd2), new NodeDiv(td,td2).evaluate()); // Float Int
         assertEquals(sd.div(se), new NodeDiv(td,te).evaluate()); // Float Binary
 
-        assertEquals(null, new NodeDiv(te,ta).evaluate()); // Binary String
-        assertEquals(null, new NodeDiv(te,tb).evaluate()); // Binary Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(te,ta).evaluate()); // Binary String
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(te,tb).evaluate()); // Binary Bool
         assertEquals(se.div(sc), new NodeDiv(te,tc).evaluate()); // Binary Int
-        assertEquals(null, new NodeDiv(te,td).evaluate()); // Binary Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeDiv(te,td).evaluate()); // Binary Float
         //assertEquals(se.div(se2), new NodeDiv(te,te2).evaluate()); // Binary Binary
 
 
@@ -200,35 +201,35 @@ public class NodeBinaryOperatorsTest {
         assertEquals("-", new NodeMinus(ta,ta2).get_label()); // get label
         assertEquals(2, new NodeMinus(ta,ta2).get_children()); // get children
 
-        assertEquals(null, new NodeMinus(ta,ta2).evaluate()); // String String
-        assertEquals(null, new NodeMinus(ta,tb).evaluate()); // String Bool
-        assertEquals(null, new NodeMinus(ta,tc).evaluate()); // String Float
-        assertEquals(null, new NodeMinus(ta,td).evaluate()); // String Int
-        assertEquals(null, new NodeMinus(ta,te).evaluate()); // String Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(ta,ta2).evaluate()); // String String
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(ta,tb).evaluate()); // String Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(ta,tc).evaluate()); // String Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(ta,td).evaluate()); // String Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(ta,te).evaluate()); // String Binary
 
-        assertEquals(null, new NodeMinus(tb,ta).evaluate()); // Bool String
-        assertEquals(null, new NodeMinus(tb,tb2).evaluate()); // Bool Bool
-        assertEquals(null, new NodeMinus(tb,tc).evaluate()); // Bool Float
-        assertEquals(null, new NodeMinus(tb,td).evaluate()); // Bool Int
-        assertEquals(null, new NodeMinus(tb,te).evaluate()); // Bool Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(tb,ta).evaluate()); // Bool String
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(tb,tb2).evaluate()); // Bool Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(tb,tc).evaluate()); // Bool Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(tb,td).evaluate()); // Bool Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(tb,te).evaluate()); // Bool Binary
 
-        assertEquals(null, new NodeMinus(tc,ta).evaluate()); // Int String
-        assertEquals(null, new NodeMinus(tc,tb).evaluate()); // Int Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(tc,ta).evaluate()); // Int String
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(tc,tb).evaluate()); // Int Bool
         assertEquals(sc.minus(sc2), new NodeMinus(tc,tc2).evaluate()); // Int Float
         assertEquals(sc.minus(sd), new NodeMinus(tc,td).evaluate()); // Int Int
         assertEquals(sc.minus(se), new NodeMinus(tc,te).evaluate()); // Int Binary
 
 
-        assertEquals(null, new NodeMinus(td,ta).evaluate()); // Float String
-        assertEquals(null, new NodeMinus(td,tb).evaluate()); // Float Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(td,ta).evaluate()); // Float String
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(td,tb).evaluate()); // Float Bool
         assertEquals(sd.minus(sc), new NodeMinus(td,tc).evaluate()); // Float Float
         assertEquals(sd.minus(sd2), new NodeMinus(td,td2).evaluate()); // Float Int
         assertEquals(sd.minus(se), new NodeMinus(td,te).evaluate()); // Float Binary
 
-        assertEquals(null, new NodeMinus(te,ta).evaluate()); // Binary String
-        assertEquals(null, new NodeMinus(te,tb).evaluate()); // Binary Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(te,ta).evaluate()); // Binary String
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(te,tb).evaluate()); // Binary Bool
         assertEquals(se.minus(sc), new NodeMinus(te,tc).evaluate()); // Binary Int
-        assertEquals(null, new NodeMinus(te,td).evaluate()); // Binary Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeMinus(te,td).evaluate()); // Binary Float
         assertEquals(se.minus(se2), new NodeMinus(te,te2).evaluate()); // Binary Binary
 
 
@@ -236,29 +237,29 @@ public class NodeBinaryOperatorsTest {
         assertEquals("+", new NodePlus(ta,ta2).get_label()); // get label
         assertEquals(2, new NodePlus(ta,ta2).get_children()); // get children
 
-        assertEquals(null, new NodePlus(tb,ta).evaluate()); // Bool String
-        assertEquals(null, new NodePlus(tb,tb2).evaluate()); // Bool Bool
-        assertEquals(null, new NodePlus(tb,tc).evaluate()); // Bool Float
-        assertEquals(null, new NodePlus(tb,td).evaluate()); // Bool Int
-        assertEquals(null, new NodePlus(tb,te).evaluate()); // Bool Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(tb,ta).evaluate()); // Bool String
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(tb,tb2).evaluate()); // Bool Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(tb,tc).evaluate()); // Bool Float
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(tb,td).evaluate()); // Bool Int
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(tb,te).evaluate()); // Bool Binary
 
-        assertEquals(null, new NodePlus(tc,ta).evaluate()); // Int String
-        assertEquals(null, new NodePlus(tc,tb).evaluate()); // Int Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(tc,ta).evaluate()); // Int String
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(tc,tb).evaluate()); // Int Bool
         assertEquals(sc.plus(sc2), new NodePlus(tc,tc2).evaluate()); // Int Float
         assertEquals(sc.plus(sd), new NodePlus(tc,td).evaluate()); // Int Int
         assertEquals(sc.plus(se), new NodePlus(tc,te).evaluate()); // Int Binary
 
 
-        assertEquals(null, new NodePlus(td,ta).evaluate()); // Float String
-        assertEquals(null, new NodePlus(td,tb).evaluate()); // Float Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(td,ta).evaluate()); // Float String
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(td,tb).evaluate()); // Float Bool
         assertEquals(sd.plus(sc), new NodePlus(td,tc).evaluate()); // Float Float
         assertEquals(sd.plus(sd2), new NodePlus(td,td2).evaluate()); // Float Int
         assertEquals(sd.plus(se), new NodePlus(td,te).evaluate()); // Float Binary
 
-        assertEquals(null, new NodePlus(te,ta).evaluate()); // Binary String
-        assertEquals(null, new NodePlus(te,tb).evaluate()); // Binary Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(te,ta).evaluate()); // Binary String
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(te,tb).evaluate()); // Binary Bool
         assertEquals(se.plus(sc), new NodePlus(te,tc).evaluate()); // Binary Int
-        assertEquals(null, new NodePlus(te,td).evaluate()); // Binary Float
+        assertEquals(ScrabbleNull.getInstance(), new NodePlus(te,td).evaluate()); // Binary Float
         assertEquals(se.plus(se2), new NodePlus(te, te2).evaluate()); // Binary Binary
 
 
@@ -266,35 +267,35 @@ public class NodeBinaryOperatorsTest {
         assertEquals("*", new NodeTimes(ta,ta2).get_label()); // get label
         assertEquals(2, new NodeTimes(ta,ta2).get_children()); // get children
 
-        assertEquals(null, new NodeTimes(ta,ta2).evaluate()); // String String
-        assertEquals(null, new NodeTimes(ta,tb).evaluate()); // String Bool
-        assertEquals(null, new NodeTimes(ta,tc).evaluate()); // String Float
-        assertEquals(null, new NodeTimes(ta,td).evaluate()); // String Int
-        assertEquals(null, new NodeTimes(ta,te).evaluate()); // String Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(ta,ta2).evaluate()); // String String
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(ta,tb).evaluate()); // String Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(ta,tc).evaluate()); // String Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(ta,td).evaluate()); // String Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(ta,te).evaluate()); // String Binary
 
-        assertEquals(null, new NodeTimes(tb,ta).evaluate()); // Bool String
-        assertEquals(null, new NodeTimes(tb,tb2).evaluate()); // Bool Bool
-        assertEquals(null, new NodeTimes(tb,tc).evaluate()); // Bool Float
-        assertEquals(null, new NodeTimes(tb,td).evaluate()); // Bool Int
-        assertEquals(null, new NodeTimes(tb,te).evaluate()); // Bool Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(tb,ta).evaluate()); // Bool String
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(tb,tb2).evaluate()); // Bool Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(tb,tc).evaluate()); // Bool Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(tb,td).evaluate()); // Bool Int
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(tb,te).evaluate()); // Bool Binary
 
-        assertEquals(null, new NodeTimes(tc,ta).evaluate()); // Int String
-        assertEquals(null, new NodeTimes(tc,tb).evaluate()); // Int Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(tc,ta).evaluate()); // Int String
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(tc,tb).evaluate()); // Int Bool
         assertEquals(sc.times(sc2), new NodeTimes(tc,tc2).evaluate()); // Int Float
         assertEquals(sc.times(sd), new NodeTimes(tc,td).evaluate()); // Int Int
         assertEquals(sc.times(se), new NodeTimes(tc,te).evaluate()); // Int Binary
 
 
-        assertEquals(null, new NodeTimes(td,ta).evaluate()); // Float String
-        assertEquals(null, new NodeTimes(td,tb).evaluate()); // Float Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(td,ta).evaluate()); // Float String
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(td,tb).evaluate()); // Float Bool
         assertEquals(sd.times(sc), new NodeTimes(td,tc).evaluate()); // Float Float
         assertEquals(sd.times(sd2), new NodeTimes(td,td2).evaluate()); // Float Int
         assertEquals(sd.times(se), new NodeTimes(td,te).evaluate()); // Float Binary
 
-        assertEquals(null, new NodeTimes(te,ta).evaluate()); // Binary String
-        assertEquals(null, new NodeTimes(te,tb).evaluate()); // Binary Bool
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(te,ta).evaluate()); // Binary String
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(te,tb).evaluate()); // Binary Bool
         assertEquals(se.times(sc), new NodeTimes(te,tc).evaluate()); // Binary Int
-        assertEquals(null, new NodeTimes(te,td).evaluate()); // Binary Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeTimes(te,td).evaluate()); // Binary Float
         assertEquals(se.times(se2), new NodeTimes(te,te2).evaluate()); // Binary Binary
 
     }

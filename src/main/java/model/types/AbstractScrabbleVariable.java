@@ -39,7 +39,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleInt) this).plus(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -52,7 +52,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleFloat) this).plus(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -63,7 +63,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleBinary) this).plus(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -71,7 +71,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
 
         // String
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -85,7 +85,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleInt) this).minus(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -98,7 +98,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleFloat) this).minus(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -109,7 +109,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleBinary) this).minus(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -117,7 +117,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
 
         // String
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -131,7 +131,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleInt) this).times(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -144,7 +144,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleFloat) this).times(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -155,7 +155,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleBinary) this).times(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -163,7 +163,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
 
         // String
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -177,7 +177,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleInt) this).div(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -190,7 +190,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleFloat) this).div(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -201,7 +201,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             } else if (other_value instanceof ScrabbleBinary) {
                 return ((ScrabbleBinary) this).div(((ScrabbleBinary) other_value));
             } else {
-                return null;
+                return ScrabbleNull.getInstance();
             }
         }
 
@@ -209,7 +209,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
 
         // String
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -230,7 +230,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
                 return ((ScrabbleBinary) this).and(((ScrabbleBinary) other_value));
             }
         }
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -251,7 +251,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
                 return ((ScrabbleBinary) this).or(((ScrabbleBinary) other_value));
             }
         }
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -262,7 +262,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             return ((ScrabbleBinary) this).not();
         }
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -271,7 +271,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             return ((ScrabbleBool) this).toScrabbleBool();
         }
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -284,7 +284,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             return ((ScrabbleBinary) this).toScrabbleFloat();
         }
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -295,7 +295,7 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             return ((ScrabbleBinary) this).toScrabbleInt();
         }
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 
     @Override
@@ -306,6 +306,6 @@ public abstract class AbstractScrabbleVariable implements IScrabbleVariable{
             return ((ScrabbleBinary) this).toScrabbleBinary();
         }
 
-        return null;
+        return ScrabbleNull.getInstance();
     }
 }

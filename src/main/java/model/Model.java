@@ -35,7 +35,7 @@ public class Model {
     );
 
     // test tree 2
-    INode tree2 = new NodePlus(
+    public static INode tree2 = new NodePlus(
             new NodePlus(
                     new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))),
                     new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))))

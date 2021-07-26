@@ -45,6 +45,7 @@ public class Controller {
     public static void reset() {
         System.out.println("yo");
         Model.tree = new NodeEmpty();
+        //Model.tree = Model.tree2;
         signal_view_update();
     }
 
