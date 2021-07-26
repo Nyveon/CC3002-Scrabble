@@ -15,4 +15,12 @@ public abstract class AbstractNode0 implements INode {
     public int get_children() {
         return 0;
     }
+
+    /**
+     * End nodes are always boxes
+     * @return 1 (pseud-enum for rounded rect)
+     */
+    public int get_shape() {
+        return 1;
+    }
 }

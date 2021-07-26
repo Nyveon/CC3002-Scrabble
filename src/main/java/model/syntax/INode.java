@@ -22,5 +22,10 @@ public interface INode {
         return null;
     }
 
+    // Method for getting the shape a node should render as
+    default int get_shape() {
+        return 0;
+    }
+
     public String get_label();
 }

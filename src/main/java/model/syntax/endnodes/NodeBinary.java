@@ -34,6 +34,6 @@ public class NodeBinary extends AbstractNode0 {
      */
     @Override
     public String get_label() {
-        return this.variable.toString();
+        return this.variable.toString().replaceFirst("^0*", ""); // replace all leading 0s
     }
 }
