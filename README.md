@@ -143,8 +143,8 @@ The FlyweightFactory object stores each variable with a name into a hashmap.
 
 For running programs, there is an abstract SyntaxTree. 
 The tree is made of nodes. Every node can be evaluated, which will return a ScrabbleVariable described above.
-Important note: if a node can't be evaluated (for example, because of invalid types in the operation), it will return null.
-There are 3 different types of nodes:
+Important note: if a node can't be evaluated (for example, because of invalid model.types in the operation), it will return null.
+There are 3 different model.types of nodes:
 
 ### End Nodes
 When evaluated, they simply return the value stored within them.
