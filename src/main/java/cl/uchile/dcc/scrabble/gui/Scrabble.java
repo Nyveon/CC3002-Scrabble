@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
 import javafx.stage.Stage;
+import model.Model;
 import model.syntax.INode;
 import model.syntax.binarynodes.AbstractNodeOperator2;
 import model.syntax.binarynodes.operators.NodeMinus;
@@ -36,6 +37,7 @@ import model.syntax.endnodes.NodeFloat;
 import model.syntax.endnodes.NodeInt;
 import model.syntax.unarynodes.operators.NodetoBinary;
 import model.syntax.unarynodes.operators.NodetoInt;
+import model.types.IScrabbleVariable;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -49,12 +51,12 @@ import static cl.uchile.dcc.scrabble.gui.ScrabbleColours.*;
  */
 public class Scrabble extends Application {
   private static final String RESOURCE_PATH = "src/main/resources/";
-  static Color COLOUR_BACKGROUND = Color.valueOf("#272744");
-  static double mouse_anchor_x = 0;
-  static double mouse_anchor_y = 0;
-  static final double SCALING = 1.1;
+  private static double mouse_anchor_x = 0;
+  private static double mouse_anchor_y = 0;
+  private static final double SCALING = 1.1;
   static final StackPane workspace = new StackPane();
-  static Group tree_render = new Group();
+  public static Group tree_render = new Group();
+  private final static Text latest_result = new Text("Latest Result: None");
 
   /**
    * Main of the program
@@ -74,6 +76,12 @@ public class Scrabble extends Application {
 
     // Making main screen
     primaryStage.setTitle("Calcularbol");
+    try {
+      primaryStage.getIcons().add(new Image(new FileInputStream(RESOURCE_PATH + "icon.png")));
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+
     int height = 1080;
     int width = 1920;
 
@@ -87,66 +95,11 @@ public class Scrabble extends Application {
     primaryStage.setScene(scene);
     primaryStage.show();
 
-
-    // Manual tree test
-    INode tree =	new NodePlus(
-            new NodeFloat(
-                    6.9
-            )
-            ,
-            new NodeOr(
-                    new NodeBinary("1000")
-                    ,
-                    new NodetoBinary(
-                            new NodeMinus(
-                                    new NodeInt(25)
-                                    ,
-                                    new NodeBinary("0101")
-                            )
-                    )
-            )
-    );
-
-    // test tree 2
-    INode tree2 = new NodePlus(
-            new NodePlus(
-                    new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))),
-                    new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))))
-            ),
-            new NodePlus(
-                    new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))),
-                    new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))))
-            )
-    );
-
-    // test tree 3
-    INode tree3 = new NodeEmpty();
-
-    // tree 4
-    INode tree4 =	new NodePlus(
-            new NodeFloat(
-                    6.9
-            )
-            ,
-            new NodeOr(
-                    new NodeBinary("1000")
-                    ,
-                    new NodetoBinary(
-                            new NodeMinus(
-                                    new NodeInt(25)
-                                    ,
-                                    new NodeTimes(new NodetoInt(new NodeBinary("0101")), new NodeEmpty())
-                            )
-                    )
-            )
-    );
-
-
     /*
      * Workspace
      */
     // Render tree
-    tree_render = TreeNode.build_tree(tree);
+    tree_render = TreeNode.build_tree(Model.tree);
     tree_render.setLayoutX(width/2);
     tree_render.setLayoutY(16);
 
@@ -177,13 +130,19 @@ public class Scrabble extends Application {
     /*
      * Toolbar
      */
-    var toolbar = new HBox();
-    toolbar.setSpacing(18);
-    toolbar.setPadding(new Insets(8d, 16d, 8d, 16d));
-    toolbar.setBackground(new Background(new BackgroundFill(MEDIUM, null, null)));
-
+    var top_bar = new BorderPane();
+    top_bar.setBackground(new Background(new BackgroundFill(MEDIUM, null, null)));
 
     final int ICON_SIZE = 72;
+    final int ICON_PAD = 18;
+
+    var toolbar = new HBox();
+    toolbar.setSpacing(ICON_PAD);
+    toolbar.setPadding(new Insets(8d, 16d, 8d, 16d));
+    //toolbar.setBackground(new Background(new BackgroundFill(MEDIUM, null, null)));
+
+
+
     toolbar.getChildren().add(new ToolBarElement("help", ICON_SIZE, ICON_SIZE).button);
 
     toolbar.getChildren().add(make_bar());
@@ -208,7 +167,23 @@ public class Scrabble extends Application {
     toolbar.getChildren().add(new ToolBarElement("trash all", ICON_SIZE, ICON_SIZE).button);
 
 
-    root.setTop(toolbar);
+    var result = new HBox();
+    result.setSpacing(18);
+    result.setPadding(new Insets(8d, 16d, 8d, 16d));
+    result.setBackground(new Background(new BackgroundFill(MEDIUM, null, null)));
+
+
+    // Latest result text
+    latest_result.setFill(BACKGROUND);
+    latest_result.setStroke(BACKGROUND.darker());
+    latest_result.setStrokeWidth(1);
+    latest_result.setFont(new Font(36));
+    result.getChildren().add(latest_result);
+
+
+    top_bar.setLeft(toolbar);
+    top_bar.setRight(result);
+    root.setTop(top_bar);
 
 
   }
@@ -227,12 +202,19 @@ public class Scrabble extends Application {
     }
   }
 
+  /**
+   * Zoom the workspace view
+   * @param direction zoom in > 0 > zoom out
+   */
   public static void zoom(double direction) {
     double scale_delta = (direction > 0) ? SCALING : 1/SCALING;
     tree_render.setScaleX(tree_render.getScaleX() * scale_delta);
     tree_render.setScaleY(tree_render.getScaleY() * scale_delta);
   }
 
+  /**
+   * Reset workspace view to default values
+   */
   public static void reset_view() {
     tree_render.setScaleX(1);
     tree_render.setScaleY(1);
@@ -240,6 +222,24 @@ public class Scrabble extends Application {
     tree_render.setTranslateY(0);
   }
 
+  /**
+   * Set the result variable externally
+   * @param evaluate the ScrabbleVariable from the evaluation
+   */
+  public static void set_result(IScrabbleVariable evaluate) {
+    latest_result.setText("Latest result: " + evaluate.toString());
+  }
+
+  /**
+   * Update the tree view
+   * Called by the controller when a change is made
+   */
+  public static void view_update() {
+    workspace.getChildren().remove(tree_render);
+    tree_render = TreeNode.build_tree(Model.tree);
+    workspace.getChildren().add(tree_render);
+    System.out.println("yo2");
+  }
 
 
 

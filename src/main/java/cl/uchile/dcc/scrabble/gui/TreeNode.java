@@ -1,5 +1,6 @@
 package cl.uchile.dcc.scrabble.gui;
 
+import controller.Controller;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -208,7 +209,17 @@ public class TreeNode {
         // Evaluate the node (this actually dependso on the control-state)
         //todo: fix
         node_stack.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            System.out.println(node.evaluate());
+
+            switch (Controller.get_selected()) {
+                case 0:
+                    break;
+                case 1:
+                    Scrabble.set_result(node.evaluate());
+                    System.out.println(node.evaluate());
+                    break;
+                case 2:
+                    break;
+            }
         });
 
 

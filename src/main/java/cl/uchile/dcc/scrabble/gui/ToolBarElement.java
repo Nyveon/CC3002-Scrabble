@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
+import model.Model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,6 +29,7 @@ public class ToolBarElement {
     private final int image_height;
     private final int image_width;
     private final Rectangle front;
+    public int selected_type = 0;
 
     public ToolBarElement(String button_type, int image_width, int image_height) {
         this.image_width = image_width;
@@ -68,12 +70,14 @@ public class ToolBarElement {
                     break;
                 case "play":
                     add_sprite(RESOURCE_PATH + "play.png");
+                    selected_type = 1;
                     break;
                 case "play all":
                     add_sprite(RESOURCE_PATH + "play_all.png");
                     break;
                 case "trash":
                     add_sprite(RESOURCE_PATH + "trash.png");
+                    selected_type = 2;
                     break;
                 case "trash all":
                     add_sprite(RESOURCE_PATH + "trash_all.png");
@@ -81,6 +85,7 @@ public class ToolBarElement {
                 case "edit":
                     add_sprite(RESOURCE_PATH + "edit.png");
                     Controller.set_selected(this);
+                    selected_type = 0;
                     break;
                 default:
                     break;
@@ -99,6 +104,13 @@ public class ToolBarElement {
                 // Flip selected property
                 button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                     Controller.set_selected(this);
+                });
+                break;
+
+            // Play all
+            case "play all":
+                button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                    Scrabble.set_result(Model.tree.evaluate());
                 });
                 break;
 
@@ -123,6 +135,13 @@ public class ToolBarElement {
             case "help":
                 button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                     OpenBrowser.open("https://github.com/CC3002-Metodologias/scrabble-Nyveon/blob/main/README.md");
+                });
+                break;
+
+            // Trash all
+            case "trash all":
+                button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                    Controller.reset();
                 });
                 break;
         }
