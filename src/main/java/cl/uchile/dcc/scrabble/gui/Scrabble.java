@@ -27,12 +27,15 @@ import model.syntax.endnodes.NodeFloat;
 import model.syntax.endnodes.NodeInt;
 import model.syntax.unarynodes.operators.NodetoBinary;
 
+import static cl.uchile.dcc.scrabble.gui.ScrabbleColours.*;
+
 /**
  * Main entry point for the application.
  * Serves as the VIEW in the MVC
  * @author Eric Kirchgessner.
  */
 public class Scrabble extends Application {
+  static Color COLOUR_BACKGROUND = Color.valueOf("#272744");
 
   public static void main(String[] args) {
     launch(args);
@@ -51,7 +54,7 @@ public class Scrabble extends Application {
     Pane root = new Pane();
     root.setPrefSize(width, height);
     Scene scene = new Scene(root, width, height);
-    scene.setFill(Color.valueOf("#272744"));
+    scene.setFill(BACKGROUND);
 
     // Draw
     primaryStage.setScene(scene);

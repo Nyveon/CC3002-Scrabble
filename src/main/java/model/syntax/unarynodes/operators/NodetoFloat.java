@@ -7,7 +7,7 @@ import model.types.IScrabbleVariable;
 /**
  * AST Node that holds one values, and applies the "toScrabbleFloat" conversion operator to it.
  */
-public class NodetoFloat extends AbstractNodeOperator1 {
+public class NodetoFloat extends AbstractNodeConversion {
     /**
      * Normal constructor, inherits form abstract unary node type.
      * @param val child node

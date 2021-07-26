@@ -7,7 +7,7 @@ import model.types.IScrabbleVariable;
 /**
  * AST Node that holds one values, and applies the "toScrabbleString" conversion operator to it.
  */
-public class NodetoString extends AbstractNodeOperator1 {
+public class NodetoString extends AbstractNodeConversion {
     /**
      * Normal constructor, inherits form abstract unary node type.
      * @param val child node
