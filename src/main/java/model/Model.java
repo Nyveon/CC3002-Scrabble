@@ -16,7 +16,7 @@ import model.syntax.unarynodes.operators.NodetoInt;
  * Front end for the model classes
  */
 public class Model {
-    public static INode tree2 =	new NodePlus(
+    public static INode tree =	new NodePlus(
             new NodeFloat(
                     6.9
             )
@@ -35,7 +35,7 @@ public class Model {
     );
 
     // test tree 2
-    public static INode tree = new NodePlus(
+    public static INode tree2 = new NodePlus(
             new NodePlus(
                     new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1)))),
                     new NodePlus(new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))), new NodePlus(new NodePlus(new NodeInt(1), new NodeInt(1)), new NodePlus(new NodeInt(1), new NodeInt(1))))
