@@ -57,6 +57,7 @@ public class ToolBarElement {
 
         Tooltip tooltip = new Tooltip("default tooltip");
         Tooltip.install(button, tooltip);
+        tooltip.setShowDelay(Duration.seconds(0.5));
         // --Initialize the different button types--
         try {
             switch (button_type) {
@@ -107,7 +108,7 @@ public class ToolBarElement {
             e.printStackTrace();
         }
 
-        tooltip.setShowDelay(Duration.seconds(0.5));
+
 
         // --Shared button events--
         switch (button_type) {
@@ -179,6 +180,11 @@ public class ToolBarElement {
     }
 
 
+    /**
+     * Add sprite resource
+     * @param file_path path of the resource
+     * @throws FileNotFoundException
+     */
     private void add_sprite(String file_path) throws FileNotFoundException {
         var sprite_image = new FileInputStream(file_path);
         sprite = new ImageView(new Image(sprite_image));
@@ -186,12 +192,18 @@ public class ToolBarElement {
         sprite.setFitWidth(image_height);
     }
 
+    /**
+     * When a selectable node is elected, modify visuals
+     */
     public void select() {
         button.setScaleX(0.9);
         button.setScaleY(0.9);
         front.opacityProperty().set(0.5);
     }
 
+    /**
+     * Reset visuals
+     */
     public void deselect() {
         button.setScaleX(1);
         button.setScaleY(1);

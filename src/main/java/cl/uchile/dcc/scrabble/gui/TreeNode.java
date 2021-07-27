@@ -220,14 +220,19 @@ public class TreeNode {
         node_stack.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 
             switch (Controller.get_selected()) {
-                case 0:
-                    Controller.selected_node = node;
+                case 0: // Edit tool
+                    if (node.editable()) {
+                        Controller.phase_1 = null;
+                        Controller.phase_2 = null;
+                        Controller.phase_3 = null;
+                        Controller.select_node(node);
+                    }
                     break;
-                case 1:
+                case 1: // Evaluate tool
                     Scrabble.set_result(node.evaluate());
                     System.out.println(node.evaluate());
                     break;
-                case 2:
+                case 2: // Deletion tool
                     Controller.delete(node);
                     break;
             }

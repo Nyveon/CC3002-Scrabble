@@ -5,15 +5,22 @@ import cl.uchile.dcc.scrabble.gui.ToolBarElement;
 import cl.uchile.dcc.scrabble.gui.TreeNode;
 import model.Model;
 import model.syntax.INode;
+import model.syntax.binarynodes.operators.*;
 import model.syntax.endnodes.NodeEmpty;
 import model.syntax.endnodes.NodeFloat;
+import model.syntax.unarynodes.operators.*;
 
 /**
  * Controller class for the MVC
  */
 public class Controller {
     public static ToolBarElement currently_selected = null;
+
+    // Editing tool variables
     public static INode selected_node = null;
+    public static String phase_1 = null; // Node abstract type
+    public static String phase_2 = null; // Node type
+    public static String phase_3 = null; // Input variable
 
     /**
      * Double dispatch for setting the currently selected mouse-cursor node-modification tool
@@ -83,6 +90,67 @@ public class Controller {
                 Model.tree.insert(selected_node, node);
             }
         }
+        selected_node = null;
         signal_view_update();
+        Scrabble.close_sidebar();
+        //reset presets
+        phase_1 = null;
+        phase_2 = null;
+        phase_3 = null;
     }
+
+    /**
+     * Select a node for editing
+     * @param node target node
+     */
+    public static void select_node(INode node) {
+        selected_node = node;
+        Scrabble.open_sidebar();
+    }
+
+    /**
+     * Insert a value_less binary node
+     */
+    public static void insert_no_value() {
+        switch (phase_2) {
+            case "and":
+                insert(new NodeAnd(new NodeEmpty(), new NodeEmpty()));
+                break;
+            case "div":
+                insert(new NodeDiv(new NodeEmpty(), new NodeEmpty()));
+                break;
+            case "minus":
+                insert(new NodeMinus(new NodeEmpty(), new NodeEmpty()));
+                break;
+            case "or":
+                insert(new NodeOr(new NodeEmpty(), new NodeEmpty()));
+                break;
+            case "plus":
+                insert(new NodePlus(new NodeEmpty(), new NodeEmpty()));
+                break;
+            case "times":
+                insert(new NodeTimes(new NodeEmpty(), new NodeEmpty()));
+                break;
+            case "not":
+                insert(new NodeNot(new NodeEmpty()));
+                break;
+            case "to binary":
+                insert(new NodetoBinary(new NodeEmpty()));
+                break;
+            case "to boolean":
+                insert(new NodetoBool(new NodeEmpty()));
+                break;
+            case "to float":
+                insert(new NodetoFloat(new NodeEmpty()));
+                break;
+            case "to integer":
+                insert(new NodetoInt(new NodeEmpty()));
+                break;
+            case "to string":
+                insert(new NodetoString(new NodeEmpty()));
+                break;
+        }
+    }
+
+
 }

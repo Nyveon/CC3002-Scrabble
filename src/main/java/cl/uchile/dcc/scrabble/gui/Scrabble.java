@@ -2,6 +2,7 @@ package cl.uchile.dcc.scrabble.gui;
 
 import controller.Controller;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -59,6 +61,8 @@ public class Scrabble extends Application {
   static final StackPane workspace = new StackPane();
   public static Group tree_render = new Group();
   private final static Text latest_result = new Text("Latest Result: None");
+  private final static BorderPane root = new BorderPane();
+  private static VBox side_bar = new VBox();
 
   /**
    * Main of the program
@@ -88,7 +92,6 @@ public class Scrabble extends Application {
     int width = 1920;
 
     // Root scene
-    var root = new BorderPane();
     root.setPrefSize(width, height);
     Scene scene = new Scene(root, width, height);
     root.setBackground(new Background(new BackgroundFill(BACKGROUND, null, null)));
@@ -187,17 +190,14 @@ public class Scrabble extends Application {
     top_bar.setRight(result);
     root.setTop(top_bar);
 
-    var side_bar = new VBox();
-    side_bar.setBackground(new Background(new BackgroundFill(MEDIUM, null, null)));
-    //side_bar.setPrefWidth(300);
-    side_bar.setSpacing(32);
-    side_bar.setPadding(new Insets(32, 16, 32, 16));
 
+    /*
     var test_rect = new Rectangle(0, 0, 128, 128);
 
     test_rect.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
       Controller.insert(new NodeFloat(6.9));
     });
+
 
     side_bar.getChildren().add(test_rect);
     side_bar.getChildren().add(create_spacer());
@@ -209,8 +209,49 @@ public class Scrabble extends Application {
     side_bar.getChildren().add(create_spacer());
     side_bar.getChildren().add(new Rectangle(0, 0, 128, 128));
     root.setRight(side_bar);
+    */
 
 
+
+  }
+
+  /**
+   * Open the node-edit sidebar
+   */
+  public static void open_sidebar() {
+    side_bar = EditBarElement.phase1();
+    root.setRight(side_bar);
+  }
+
+  /**
+   * Activate the SECOND PHASE
+   */
+  public static void sidebar_2() {
+    side_bar = EditBarElement.phase2();
+    root.setRight(side_bar);
+  }
+
+  /**
+   * Activate the final phase and prompt for user input text
+   */
+  public static void sidebar_3() {
+    close_sidebar();
+
+    if (Controller.phase_1.equals("type end") || Controller.phase_1.equals("type unary")) {
+      Controller.insert_no_value();
+    } else {
+      TextInputDialog td = new TextInputDialog();
+      td.setHeaderText("Input the value you wish this node to have");
+      td.showAndWait();
+    }
+
+  }
+
+  /**
+   * Open the node-edit sidebar
+   */
+  public static void close_sidebar() {
+    root.setRight(null);
   }
 
   /**
@@ -267,9 +308,12 @@ public class Scrabble extends Application {
     System.out.println("yo2");
   }
 
+  /**
+   * Vertical spacer for the edit side-bar
+   * @return greedy spacer region
+   */
   private Node create_spacer() {
     final Region spacer = new Region();
-    // Make it always grow or shrink according to the available space
     VBox.setVgrow(spacer, Priority.ALWAYS);
     return spacer;
   }
