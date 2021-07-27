@@ -1,5 +1,6 @@
 package model.syntax;
 
+import model.types.ScrabbleNull;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
@@ -65,35 +66,35 @@ public class NodeUnaryOperatorsTest {
         var te = new NodeBinary(e);
 
         // Test nodeNot
-        assertEquals(null, new NodeNot(ta).evaluate()); // String
+        assertEquals(ScrabbleNull.getInstance(), new NodeNot(ta).evaluate()); // String
         assertEquals(sb.not(), new NodeNot(tb).evaluate()); // Boolean
-        assertEquals(null, new NodeNot(tc).evaluate()); // FInt
-        assertEquals(null, new NodeNot(td).evaluate()); // Float
+        assertEquals(ScrabbleNull.getInstance(), new NodeNot(tc).evaluate()); // FInt
+        assertEquals(ScrabbleNull.getInstance(), new NodeNot(td).evaluate()); // Float
         assertEquals(se.not(), new NodeNot(te).evaluate()); // Binary
         assertEquals("NOT", new NodeNot(te).get_label()); // get label
         assertEquals(1, new NodeNot(te).get_children()); // get label
 
         // Test nodetoBinary
-        assertEquals(null, new NodetoBinary(ta).evaluate()); // String
-        assertEquals(null, new NodetoBinary(tb).evaluate()); // Boolean
+        assertEquals(ScrabbleNull.getInstance(), new NodetoBinary(ta).evaluate()); // String
+        assertEquals(ScrabbleNull.getInstance(), new NodetoBinary(tb).evaluate()); // Boolean
         assertEquals(sc.toScrabbleBinary(), new NodetoBinary(tc).evaluate()); // Int
-        assertEquals(null, new NodetoBinary(td).evaluate()); // Float
+        assertEquals(ScrabbleNull.getInstance(), new NodetoBinary(td).evaluate()); // Float
         assertEquals(se.toScrabbleBinary(), new NodetoBinary(te).evaluate()); // Binary
         assertEquals("To Binary", new NodetoBinary(te).get_label()); // get label
         assertEquals(1, new NodetoBinary(te).get_children()); // get label
 
         // Test nodetoBool
-        assertEquals(null, new NodetoBool(ta).evaluate()); // String
+        assertEquals(ScrabbleNull.getInstance(), new NodetoBool(ta).evaluate()); // String
         assertEquals(sb.toScrabbleBool(), new NodetoBool(tb).evaluate()); // Boolean
-        assertEquals(null, new NodetoBool(tc).evaluate()); // Int
-        assertEquals(null, new NodetoBool(td).evaluate()); // Float
-        assertEquals(null, new NodetoBool(te).evaluate()); // Binary
+        assertEquals(ScrabbleNull.getInstance(), new NodetoBool(tc).evaluate()); // Int
+        assertEquals(ScrabbleNull.getInstance(), new NodetoBool(td).evaluate()); // Float
+        assertEquals(ScrabbleNull.getInstance(), new NodetoBool(te).evaluate()); // Binary
         assertEquals("To Boolean", new NodetoBool(te).get_label()); // get label
         assertEquals(1, new NodetoBool(te).get_children()); // get label
 
         // Test nodetoFloat
-        assertEquals(null, new NodetoFloat(ta).evaluate()); // String
-        assertEquals(null, new NodetoFloat(tb).evaluate()); // Boolean
+        assertEquals(ScrabbleNull.getInstance(), new NodetoFloat(ta).evaluate()); // String
+        assertEquals(ScrabbleNull.getInstance(), new NodetoFloat(tb).evaluate()); // Boolean
         assertEquals(sc.toScrabbleFloat(), new NodetoFloat(tc).evaluate()); // Int
         assertEquals(sd.toScrabbleFloat(), new NodetoFloat(td).evaluate()); // Float
         assertEquals(se.toScrabbleFloat(), new NodetoFloat(te).evaluate()); // Binary
@@ -102,10 +103,10 @@ public class NodeUnaryOperatorsTest {
 
 
         // Test nodetoInt
-        assertEquals(null, new NodetoInt(ta).evaluate()); // String
-        assertEquals(null, new NodetoInt(tb).evaluate()); // Boolean
+        assertEquals(ScrabbleNull.getInstance(), new NodetoInt(ta).evaluate()); // String
+        assertEquals(ScrabbleNull.getInstance(), new NodetoInt(tb).evaluate()); // Boolean
         assertEquals(sc.toScrabbleInt(), new NodetoInt(tc).evaluate()); // Int
-        assertEquals(null, new NodetoInt(td).evaluate()); // Float
+        assertEquals(ScrabbleNull.getInstance(), new NodetoInt(td).evaluate()); // Float
         assertEquals(se.toScrabbleInt(), new NodetoInt(te).evaluate()); // Binary
         assertEquals("To Integer", new NodetoInt(te).get_label()); // get label
         assertEquals(1, new NodetoInt(te).get_children()); // get label
