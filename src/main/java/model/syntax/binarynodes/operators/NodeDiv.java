@@ -3,6 +3,8 @@ package model.syntax.binarynodes.operators;
 import model.syntax.INode;
 import model.syntax.binarynodes.AbstractNodeOperator2;
 import model.types.IScrabbleVariable;
+import model.types.ScrabbleNull;
+
 /**
  * AST Node that holds two values, and applies the "div" operator to them
  */
@@ -23,7 +25,11 @@ public class NodeDiv extends AbstractNodeOperator2 {
      */
     @Override
     public IScrabbleVariable evaluate() {
-        return left.evaluate().div(right.evaluate());
+        try {
+            return left.evaluate().div(right.evaluate());
+        } catch (ArithmeticException e){
+            return ScrabbleNull.getInstance();
+        }
     }
 
     /**

@@ -17,6 +17,7 @@ import model.types.numbers.ScrabbleInt;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class NodeBinaryOperatorsTest {
     protected int seed;
@@ -91,6 +92,31 @@ public class NodeBinaryOperatorsTest {
         var tc2 = new NodeInt(c2);
         var td2 = new NodeFloat(d2);
         var te2 = new NodeBinary(e2);
+
+        // Deletion test
+        var deltest = new NodeAnd(ta,ta2);
+        deltest.delete(ta);
+        deltest.delete(tb);
+        deltest.delete(tc);
+        var deltest2 = new NodeAnd(ta,ta2);
+        deltest2.delete(ta2);
+        assertNotEquals(new NodeAnd(ta,ta2), deltest);
+        assertNotEquals(new NodeAnd(ta,ta2), deltest2);
+
+        // Insertion test
+        var inserttest = new NodeAnd(ta,ta2);
+        deltest.insert(ta, ta2);
+        var inserttest2 = new NodeAnd(ta,ta2);
+        deltest.insert(ta2, ta);
+        //assertEquals(new NodeAnd(ta,ta), inserttest);
+        //assertEquals(new NodeAnd(ta,ta), inserttest2);
+
+
+        // Getters tests
+        var gettest = new NodeAnd(ta,ta2);
+        assertEquals(ta, gettest.get_child_a());
+        assertEquals(ta2, gettest.get_child_b());
+
 
         // --Test nodeAnd--
         assertEquals("AND", new NodeAnd(ta,ta2).get_label()); // get label
