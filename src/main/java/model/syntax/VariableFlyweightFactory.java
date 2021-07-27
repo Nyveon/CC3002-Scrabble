@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 /**
  * Flyweight object for optimizing memory usage of ScrabbleVariables
+ * ---DEPRECATED---
  */
 public class VariableFlyweightFactory {
     static HashMap<String, IScrabbleVariable> variables = new HashMap<String, IScrabbleVariable>();

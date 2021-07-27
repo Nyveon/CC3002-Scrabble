@@ -1,17 +1,19 @@
 package cl.uchile.dcc.scrabble.gui;
 
 import controller.Controller;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
+import javafx.util.Duration;
 import model.syntax.INode;
 import static cl.uchile.dcc.scrabble.gui.ScrabbleColours.*;
 
@@ -22,7 +24,7 @@ public class TreeNode {
     // Default constants
     private static final int NODE_SIZE = 32;
     private static final int NODE_VERTICAL_SPACING = 78;
-    private static final int NODE_HORIZONTAL_SPACING = 48;
+    private static final int NODE_HORIZONTAL_SPACING = 32;
 
 
     /**
@@ -182,14 +184,21 @@ public class TreeNode {
         // --- Node mouse exited event ---
 
         // Make node's text
-        var value_text = new Text(node.get_label());
+        var value_text = new Label(node.get_label());
         value_text.setTextAlignment(TextAlignment.CENTER);
-        value_text.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
-        value_text.setFill(LIGHT);
+        value_text.setTextFill(LIGHT);
+        value_text.setTextOverrun(OverrunStyle.ELLIPSIS);
+        value_text.setMaxWidth(NODE_SIZE*1.7);
+        value_text.setAlignment(Pos.BASELINE_CENTER);
 
         // Output
         var node_stack = new StackPane();
         node_stack.getChildren().addAll(shape, value_text);
+
+        // Tooltip
+        Tooltip tooltip = new Tooltip(node.get_label());
+        Tooltip.install(node_stack, tooltip);
+        tooltip.setShowDelay(Duration.seconds(0.5));
 
         // --- Node mouse entered event ---
 
@@ -206,18 +215,20 @@ public class TreeNode {
             finalShape.setFill(VERYDARK);
         });
 
-        // Evaluate the node (this actually dependso on the control-state)
+        // Evaluate the node (this actually depends on the control-state)
         //todo: fix
         node_stack.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 
             switch (Controller.get_selected()) {
                 case 0:
+                    Controller.selected_node = node;
                     break;
                 case 1:
                     Scrabble.set_result(node.evaluate());
                     System.out.println(node.evaluate());
                     break;
                 case 2:
+                    Controller.delete(node);
                     break;
             }
         });

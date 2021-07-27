@@ -1,14 +1,15 @@
 package model.syntax.binarynodes;
 
 import model.syntax.INode;
+import model.syntax.endnodes.NodeEmpty;
 
 /**
  * Abstract AST node type corresponding to a node with 2 children (binary node).
  */
 public abstract class AbstractNodeOperator2 implements INode {
     // All binary nodes have 2 children nodes.
-    protected final INode left;
-    protected final INode right;
+    protected INode left;
+    protected INode right;
 
     /**
      * Default constructor for a binary nodes, all it needs are the two child nodes.
@@ -42,5 +43,39 @@ public abstract class AbstractNodeOperator2 implements INode {
      */
     public INode get_child_b() {
         return this.right;
+    }
+
+    /**
+     * Delete either child if it is the target, otherwise postorder to children.
+     * @param node Target for deletion
+     */
+    @Override
+    public void delete(INode node) {
+        if (left == node) {
+            this.left = new NodeEmpty();
+        } else if (right == node) {
+            this.right = new NodeEmpty();
+        } else {
+            this.left.delete(node);
+            this.right.delete(node);
+        }
+    }
+
+
+    /**
+     * Insert node if it corresponds
+     * @param target_node
+     * @param insertion_node
+     */
+    @Override
+    public void insert(INode target_node, INode insertion_node) {
+        if (this.left == target_node) {
+            this.left = insertion_node;
+        } else if (this.right == target_node) {
+            this.right = insertion_node;
+        } else {
+            this.left.insert(target_node, insertion_node);
+            this.right.insert(target_node, insertion_node);
+        }
     }
 }

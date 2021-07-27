@@ -2,6 +2,7 @@ package cl.uchile.dcc.scrabble.gui;
 
 import controller.Controller;
 import javafx.scene.Node;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -11,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
+import javafx.util.Duration;
 import model.Model;
 
 import java.io.FileInputStream;
@@ -37,8 +39,7 @@ public class ToolBarElement {
 
         // -Background box-
         double arc = 16;
-        double new_size = image_width;
-        var back = new Rectangle(new_size/2, new_size/2, new_size, new_size);
+        var back = new Rectangle((double) image_width /2, (double) image_width /2, image_width, image_width);
         ((Rectangle) back).setArcWidth(arc);
         ((Rectangle) back).setArcHeight(arc);
         back.setFill(LIGHT);
@@ -47,45 +48,57 @@ public class ToolBarElement {
         back.setStrokeWidth(2);
 
         // -Foreground box-
-        front = new Rectangle(new_size/2, new_size/2, new_size, new_size);
+        front = new Rectangle((double) image_width /2, (double) image_width /2, image_width, image_width);
         ((Rectangle) front).setArcWidth(arc);
         ((Rectangle) front).setArcHeight(arc);
         front.setFill(BACKGROUND);
         front.opacityProperty().set(0);
 
+
+        Tooltip tooltip = new Tooltip("default tooltip");
+        Tooltip.install(button, tooltip);
         // --Initialize the different button types--
         try {
             switch (button_type) {
                 case "help":
                     add_sprite(RESOURCE_PATH + "help.png");
+                    tooltip.setText("Get Help.");
                     break;
                 case "zoom in":
                     add_sprite(RESOURCE_PATH + "zoom_in.png");
+                    tooltip.setText("Zoom In.");
                     break;
                 case "zoom out":
                     add_sprite(RESOURCE_PATH + "zoom_out.png");
+                    tooltip.setText("Zoom Out.");
                     break;
                 case "center":
                     add_sprite(RESOURCE_PATH + "center.png");
+                    tooltip.setText("Reset View.");
                     break;
                 case "play":
                     add_sprite(RESOURCE_PATH + "play.png");
                     selected_type = 1;
+                    tooltip.setText("Calculate specific node.");
                     break;
                 case "play all":
                     add_sprite(RESOURCE_PATH + "play_all.png");
+                    tooltip.setText("Calculate all nodes.");
                     break;
                 case "trash":
                     add_sprite(RESOURCE_PATH + "trash.png");
                     selected_type = 2;
+                    tooltip.setText("Delete specific node.");
                     break;
                 case "trash all":
                     add_sprite(RESOURCE_PATH + "trash_all.png");
+                    tooltip.setText("Delete all nodes.");
                     break;
                 case "edit":
                     add_sprite(RESOURCE_PATH + "edit.png");
                     Controller.set_selected(this);
                     selected_type = 0;
+                    tooltip.setText("Edit nodes.");
                     break;
                 default:
                     break;
@@ -93,6 +106,8 @@ public class ToolBarElement {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        tooltip.setShowDelay(Duration.seconds(0.5));
 
         // --Shared button events--
         switch (button_type) {

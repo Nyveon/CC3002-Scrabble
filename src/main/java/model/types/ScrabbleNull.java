@@ -23,4 +23,8 @@ public class ScrabbleNull extends AbstractScrabbleVariable {
     public IScrabbleVariable copy() {
         return null;
     }
+
+    public String toString() {
+        return "Null";
+    }
 }

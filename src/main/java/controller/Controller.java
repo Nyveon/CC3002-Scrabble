@@ -6,12 +6,14 @@ import cl.uchile.dcc.scrabble.gui.TreeNode;
 import model.Model;
 import model.syntax.INode;
 import model.syntax.endnodes.NodeEmpty;
+import model.syntax.endnodes.NodeFloat;
 
 /**
  * Controller class for the MVC
  */
 public class Controller {
     public static ToolBarElement currently_selected = null;
+    public static INode selected_node = null;
 
     /**
      * Double dispatch for setting the currently selected mouse-cursor node-modification tool
@@ -43,9 +45,8 @@ public class Controller {
      * Method for resetting the model
      */
     public static void reset() {
-        System.out.println("yo");
         Model.tree = new NodeEmpty();
-        //Model.tree = Model.tree2;
+        //Model.tree = Model.tree4;
         signal_view_update();
     }
 
@@ -54,5 +55,34 @@ public class Controller {
      */
     private static void signal_view_update() {
         Scrabble.view_update();
+    }
+
+    /**
+     * Insertion deletion of a specific node within the model
+     * @param node Target for deletion
+     */
+    public static void delete(INode node) {
+        if (Model.tree == node) { // Base case
+            reset();
+        } else { // Recursive deletion by the model
+            Model.tree.delete(node);
+            signal_view_update();
+        }
+    }
+
+    /**
+     * Insertion of a specific node within the model.
+     * Target is the currently selected node.
+     * @param node Node to be inserted.
+     */
+    public static void insert(INode node) {
+        if (selected_node != null) {
+            if (Model.tree == selected_node) {
+                Model.tree = node;
+            } else {
+                Model.tree.insert(selected_node, node);
+            }
+        }
+        signal_view_update();
     }
 }

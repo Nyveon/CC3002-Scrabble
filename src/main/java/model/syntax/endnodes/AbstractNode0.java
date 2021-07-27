@@ -23,4 +23,21 @@ public abstract class AbstractNode0 implements INode {
     public int get_shape() {
         return 1;
     }
+
+
+    /**
+     * Leaf nodes can't be deleted
+     * @param node Target for deletion
+     */
+    @Override
+    public void delete(INode node) { }
+
+    /**
+     * Leaf nodes can't insert.
+     * @param target_node
+     * @param insertion_node
+     */
+    public void insert(INode target_node, INode insertion_node) {
+
+    }
 }

@@ -1,5 +1,6 @@
 package model.syntax;
 
+import model.syntax.endnodes.NodeEmpty;
 import model.types.IScrabbleVariable;
 
 /**
@@ -28,4 +29,16 @@ public interface INode {
     }
 
     public String get_label();
+
+    // Method for insertion-deleting a node of the tree
+    void delete(INode node);
+
+    // Method for insertion of a node of the tree
+    void insert(INode target_node, INode insertion_node);
+
+
+    // Editable
+    default boolean editable() {
+        return false;
+    }
 }

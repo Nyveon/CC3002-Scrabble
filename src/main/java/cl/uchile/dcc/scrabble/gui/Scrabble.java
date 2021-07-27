@@ -1,5 +1,6 @@
 package cl.uchile.dcc.scrabble.gui;
 
+import controller.Controller;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -89,7 +91,8 @@ public class Scrabble extends Application {
     var root = new BorderPane();
     root.setPrefSize(width, height);
     Scene scene = new Scene(root, width, height);
-    scene.setFill(BACKGROUND);
+    root.setBackground(new Background(new BackgroundFill(BACKGROUND, null, null)));
+
 
     // Draw
     primaryStage.setScene(scene);
@@ -180,10 +183,32 @@ public class Scrabble extends Application {
     latest_result.setFont(new Font(36));
     result.getChildren().add(latest_result);
 
-
     top_bar.setLeft(toolbar);
     top_bar.setRight(result);
     root.setTop(top_bar);
+
+    var side_bar = new VBox();
+    side_bar.setBackground(new Background(new BackgroundFill(MEDIUM, null, null)));
+    //side_bar.setPrefWidth(300);
+    side_bar.setSpacing(32);
+    side_bar.setPadding(new Insets(32, 16, 32, 16));
+
+    var test_rect = new Rectangle(0, 0, 128, 128);
+
+    test_rect.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+      Controller.insert(new NodeFloat(6.9));
+    });
+
+    side_bar.getChildren().add(test_rect);
+    side_bar.getChildren().add(create_spacer());
+    side_bar.getChildren().add(new Rectangle(0, 0, 128, 128));
+    side_bar.getChildren().add(create_spacer());
+    side_bar.getChildren().add(new Rectangle(0, 0, 128, 128));
+    side_bar.getChildren().add(create_spacer());
+    side_bar.getChildren().add(new Rectangle(0, 0, 128, 128));
+    side_bar.getChildren().add(create_spacer());
+    side_bar.getChildren().add(new Rectangle(0, 0, 128, 128));
+    root.setRight(side_bar);
 
 
   }
@@ -235,10 +260,18 @@ public class Scrabble extends Application {
    * Called by the controller when a change is made
    */
   public static void view_update() {
+    latest_result.setText("Latest Result: None");
     workspace.getChildren().remove(tree_render);
     tree_render = TreeNode.build_tree(Model.tree);
     workspace.getChildren().add(tree_render);
     System.out.println("yo2");
+  }
+
+  private Node create_spacer() {
+    final Region spacer = new Region();
+    // Make it always grow or shrink according to the available space
+    VBox.setVgrow(spacer, Priority.ALWAYS);
+    return spacer;
   }
 
 

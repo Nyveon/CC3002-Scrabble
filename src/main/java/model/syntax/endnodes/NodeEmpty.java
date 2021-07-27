@@ -1,6 +1,7 @@
 package model.syntax.endnodes;
 
 import model.types.IScrabbleVariable;
+import model.types.ScrabbleNull;
 
 /**
  * Childless node type (end node)
@@ -18,6 +19,15 @@ public class NodeEmpty extends AbstractNode0 {
 
     @Override
     public IScrabbleVariable evaluate() {
-        return null;
+        return ScrabbleNull.getInstance();
+    }
+
+    /**
+     * This node is the only editable one
+     * @return
+     */
+    @Override
+    public boolean editable() {
+        return true;
     }
 }

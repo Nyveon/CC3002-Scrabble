@@ -28,7 +28,7 @@ public class Model {
                             new NodeMinus(
                                     new NodeInt(25)
                                     ,
-                                    new NodeBinary("0101")
+                                    new NodeBinary("0101") //0101
                             )
                     )
             )
@@ -50,7 +50,7 @@ public class Model {
     INode tree3 = new NodeEmpty();
 
     // tree 4
-    INode tree4 =	new NodePlus(
+    public static INode tree4 =	new NodePlus(
             new NodeFloat(
                     6.9
             )
