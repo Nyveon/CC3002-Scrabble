@@ -3,12 +3,15 @@ package controller;
 import cl.uchile.dcc.scrabble.gui.Scrabble;
 import cl.uchile.dcc.scrabble.gui.ToolBarElement;
 import cl.uchile.dcc.scrabble.gui.TreeNode;
+import javafx.scene.control.Alert;
 import model.Model;
 import model.syntax.INode;
 import model.syntax.binarynodes.operators.*;
-import model.syntax.endnodes.NodeEmpty;
-import model.syntax.endnodes.NodeFloat;
+import model.syntax.endnodes.*;
 import model.syntax.unarynodes.operators.*;
+
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Controller class for the MVC
@@ -152,5 +155,48 @@ public class Controller {
         }
     }
 
-
+    /**
+     * Regex check for proper input, then create the nodes
+     * @param value string user input
+     */
+    public static void insert_value(String value) {
+        try {
+            switch (phase_2) {
+                case "binary":
+                    if (!Pattern.matches("\\b[01]+\\b", value)) {
+                        throw new TypeException(value);
+                    };
+                    insert(new NodeBinary(value));
+                    break;
+                case "boolean":
+                    if (value.toLowerCase().equals("true") || value.toLowerCase().equals("1"))  {
+                        insert(new NodeBool(true));
+                    } else if (value.toLowerCase().equals("false") || value.toLowerCase().equals("0"))  {
+                        insert(new NodeBool(false));
+                    } else {
+                        throw new TypeException(value);
+                    }
+                    break;
+                case "float":
+                    if (!Pattern.matches("^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$", value)) {
+                        throw new TypeException(value);
+                    };
+                    insert(new NodeFloat(Double.parseDouble(value)));
+                    break;
+                case "integer":
+                    if (!Pattern.matches("^-?[0-9]+$", value)) {
+                        throw new TypeException(value);
+                    };
+                    insert(new NodeInt(Integer.parseInt(value)));
+                    break;
+                case "string":
+                    insert(new NodeString(value));
+                    break;
+            }
+        } catch (TypeException e) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText(e.getMsg());
+            a.showAndWait();
+        }
+    }
 }

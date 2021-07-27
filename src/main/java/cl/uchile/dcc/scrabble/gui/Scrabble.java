@@ -237,12 +237,15 @@ public class Scrabble extends Application {
   public static void sidebar_3() {
     close_sidebar();
 
-    if (Controller.phase_1.equals("type end") || Controller.phase_1.equals("type unary")) {
+    if (Controller.phase_1.equals("type binary") || Controller.phase_1.equals("type unary")) {
       Controller.insert_no_value();
     } else {
       TextInputDialog td = new TextInputDialog();
+      td.setContentText("Node Input");
       td.setHeaderText("Input the value you wish this node to have");
       td.showAndWait();
+
+      Controller.insert_value(td.getEditor().getText());
     }
 
   }
@@ -307,17 +310,4 @@ public class Scrabble extends Application {
     workspace.getChildren().add(tree_render);
     System.out.println("yo2");
   }
-
-  /**
-   * Vertical spacer for the edit side-bar
-   * @return greedy spacer region
-   */
-  private Node create_spacer() {
-    final Region spacer = new Region();
-    VBox.setVgrow(spacer, Priority.ALWAYS);
-    return spacer;
-  }
-
-
-
 }
